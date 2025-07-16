@@ -1,7 +1,6 @@
 html, body, #root {
     height: 100%;
 }
-
 body {
     font-family: "Georgia", "Times New Roman", serif;
     background-color: #e9d5ff;
@@ -10,7 +9,6 @@ body {
     display: flex;
     justify-content: center;
 }
-
 .App {
   width: 100%;
   max-width: 1200px;
@@ -18,11 +16,9 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
-
 .app-content {
     flex-grow: 1;
 }
-
 /* --- App Header & Footer --- */
 .app-header {
     background-color: #581c87;
@@ -34,13 +30,11 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-
 .app-header .main-title {
     font-size: 1.875rem;
     color: #e9d5ff;
     margin: 0;
 }
-
 .app-header nav a {
     margin-left: 1.5rem;
     font-size: 1rem;
@@ -50,16 +44,13 @@ body {
     transition: color 0.3s;
     border-bottom: 2px solid transparent;
 }
-
 .app-header nav a:hover {
     color: #fff;
 }
-
 .app-header nav a.nav-active {
     font-weight: bold;
     color: #fff;
 }
-
 .app-footer {
     background-color: #581c87;
     color: #e9d5ff;
@@ -67,13 +58,10 @@ body {
     text-align: center;
     margin-top: 2rem;
 }
-
 .app-footer p {
     margin: 0;
     color: #e9d5ff;
 }
-
-
 /* --- Page Styles --- */
 .page-container {
   background-color: #faf5ff;
@@ -83,25 +71,21 @@ body {
   margin: 0 1rem 1rem 1rem;
   text-align: center;
 }
-
 .page-container header {
   margin-bottom: 1rem;
   border-bottom: 1px solid #eee;
   padding-bottom: 1rem;
 }
-
 .page-container h1 {
   font-size: 2.5rem;
   color: #4a148c;
   font-weight: bold;
 }
-
 .page-container h2 {
   font-size: 2rem;
   color: #6a1b9a;
   font-weight: bold;
 }
-
 .intro-text {
     max-width: 800px;
     margin: 1.5rem auto;
@@ -109,18 +93,14 @@ body {
     font-size: 1.25rem;
     line-height: 1.6;
 }
-
 .intro-text.first-intro {
     margin-top: 0;
 }
 
-/* About Gerry Page Specific Styles */
-.about-gerry-page p {
-    text-align: left;
-    max-width: 800px;
-    margin: 1.5rem auto;
+/* --- About Gerry Page Specific Styles (UPDATED) --- */
+.about-gerry-page .intro-text {
+    text-align: left; /* This ensures the story text is left-aligned */
 }
-
 
 /* Homepage Card */
 .home-card-container {
@@ -128,7 +108,6 @@ body {
     justify-content: center;
     margin-bottom: 2rem;
 }
-
 .card {
     border-radius: 0.75rem;
     overflow: hidden;
@@ -137,17 +116,14 @@ body {
     max-width: 400px;
     cursor: pointer;
 }
-
 .card:hover {
     transform: translateY(-5px);
 }
-
 .card-image {
     width: 100%;
     height: auto;
     object-fit: cover;
 }
-
 /* Subscription Box */
 .subscription-box {
     background-color: #d8b4fe;
@@ -160,41 +136,33 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
 .subscription-box h3 {
     margin-bottom: 1rem;
     color: #4a148c;
 }
-
 .subscription-box p {
     color: #581c87;
     margin-bottom: 1.5rem;
     font-size: 1rem;
 }
-
 .subscription-form {
     display: flex;
     gap: 0.5rem;
     width: 100%;
 }
-
 .subscription-form input {
     flex-grow: 1;
     padding: 0.75rem;
     border: 1px solid #a78bfa;
     border-radius: 0.375rem;
 }
-
 .subscription-form button {
     background-color: #581c87;
     color: #e9d5ff;
 }
-
 .subscription-form button:hover {
     background-color: #4a148c;
 }
-
-
 /* Well of Wisdom Page */
 .well-text {
     max-width: 800px;
@@ -203,13 +171,11 @@ body {
     line-height: 1.6;
     font-size: 1.25rem;
 }
-
 .well-text.italic {
     font-style: italic;
     color: #6a1b9a;
     font-size: 1.25rem;
 }
-
 .well-container {
     position: relative;
     width: 100%;
@@ -247,7 +213,6 @@ body {
     z-index: 6;
     pointer-events: none;
 }
-
 /* Query Box */
 .query-box {
   margin-top: 40px;
@@ -260,7 +225,6 @@ body {
   margin-right: auto;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
-
 .query-box textarea {
     width: 95%;
     padding: 1rem;
@@ -269,7 +233,6 @@ body {
     border: 1px solid #a78bfa;
     font-family: inherit;
 }
-
 .query-box button {
     font-size: 1.5rem;
     padding: 1rem 2.5rem;
@@ -278,19 +241,15 @@ body {
     margin-top: 1rem;
     font-family: inherit;
 }
-
 .query-box button:hover {
     background-color: #581c87;
 }
-
 .echo-message {
     margin-top: 1rem;
     color: #4a148c;
     font-style: italic;
     font-weight: bold;
 }
-
-
 /* Card Selection Page */
 .card-grid {
   display: grid;
@@ -301,7 +260,6 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-
 .card-back {
     width: 100px;
     height: 150px;
@@ -313,25 +271,21 @@ body {
     overflow: hidden;
     border: 3px solid transparent;
 }
-
 .card-back img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 0.375rem;
 }
-
 .card-back.selected {
     transform: scale(1.1) translateY(-10px);
     box-shadow: 0 0 20px 5px rgba(253, 224, 71, 0.9);
     border-color: #fde047;
 }
-
 /* --- Reading Display Page --- */
 .reading-page-bg {
     background-color: #fef3c7;
 }
-
 .reading-cards-grid {
     display: grid;
     gap: 2rem;
@@ -339,7 +293,6 @@ body {
     margin: 0 auto 3rem;
     grid-template-columns: repeat(2, 1fr);
 }
-
 .reading-card {
     width: 300px;
     height: 450px;
@@ -351,17 +304,14 @@ body {
     cursor: pointer;
     margin: 0 auto;
 }
-
 .reading-card:hover {
     transform: scale(1.05);
 }
-
 .reading-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
 .ask-gerry-button {
     background-color: #6b21a8;
     color: white;
@@ -372,11 +322,9 @@ body {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     margin-bottom: 2rem; /* Increased margin */
 }
-
 .ask-gerry-button:hover {
     background-color: #581c87;
 }
-
 .interpretation-box {
   margin-top: 1.5rem;
   padding: 1.5rem;
@@ -391,11 +339,9 @@ body {
   font-size: 1.15rem;
   line-height: 1.7;
 }
-
 .post-reading-options {
     margin-top: 1.5rem;
 }
-
 .memento-button {
     background-color: #f59e0b;
     color: #4a148c;
@@ -406,7 +352,6 @@ body {
 .memento-button:hover {
     background-color: #d97706;
 }
-
 .journey-button {
     background-color: #22c55e;
     color: white;
@@ -418,7 +363,6 @@ body {
 .journey-button:hover {
     background-color: #16a34a;
 }
-
 .new-reading-button {
     margin-top: 2.5rem;
     background-color: #6b7280;
@@ -427,11 +371,9 @@ body {
     padding: 0.5rem 1rem;
     border-radius: 0.375rem;
 }
-
 .new-reading-button:hover {
     background-color: #4b5563;
 }
-
 .loader {
     border: 5px solid #f3f3f3;
     border-top: 5px solid #6b21a8;
@@ -441,7 +383,6 @@ body {
     animation: spin 1s linear infinite;
     margin: 2rem auto;
 }
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

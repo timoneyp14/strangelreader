@@ -1,19 +1,19 @@
-// This is a test to make sure commits are working
 import React, { useState } from 'react';
-// ... the rest of your fileimport React, { useState } from 'react';
 import './App.css';
 import HomePage from './HomePage';
 import CardSelectionPage from './CardSelectionPage';
 import ReadingDisplayPage from './ReadingDisplayPage';
+import { CARD_DATA } from './cardData'; // Import the card data
 
 // --- Placeholder Pages ---
 const AboutGerryPage = () => (
     <div className="page-container about-gerry-page">
         <h1>Archangel Gerry's Story</h1>
-        <p>
+        {/* The className="intro-text" has been added to both paragraphs */}
+        <p className="intro-text">
             Once, in a time not so long ago, Gerry walked the Earth as a human. He wasn't a tremendously brilliant human, and led, what could perhaps best be described as a ne'er-do-well existence. However, in the last few seconds of his life, a child darted into the path of an oncoming vehicle. In that instant, all the noise of Gerry's life muted, and there was only a single, clear and noble choice. He intervened, dived into the road and pushed the child to safety. Gerry was killed in the process. His soul, unburdened by the chance to second-guess, felt a profound sense of peace. He had, without question or regret, finally done something true.
         </p>
-        <p>
+        <p className="intro-text">
             When Saint Peter met Gerry at the gates of Heaven, he couldn't, in good conscience, turn him away. Despite Gerry's prior existence, it wouldn't be proper to ignore his final act of self-sacrifice and bravery. So, Saint Peter offered Gerry a chance to earn his way to Heaven: by collaborating with Paul Timoney and sharing the strange and crooked wisdom he'd gathered from a life lived in the margins. And so, Archangel Gerry was born, continuing his mission to offer guidance and a weird, fresh perspective to all who seek it.
         </p>
     </div>
@@ -25,7 +25,6 @@ const ProgressToHeavenPage = () => (
         <p>This page will show Gerry's journey to the heavens.</p>
     </div>
 );
-
 
 // --- Header Component ---
 const Header = ({ setPage, page }) => {
@@ -50,13 +49,13 @@ const Footer = () => {
     );
 };
 
-
 // --- Main App Component ---
 function App() {
   const [page, setPage] = useState('home');
   const [userQuery, setUserQuery] = useState('');
   const [selectedCards, setSelectedCards] = useState([]);
 
+  // Function to reset the state for a new reading
   const navigateHome = () => {
       setUserQuery('');
       setSelectedCards([]);
@@ -77,7 +76,8 @@ function App() {
         return <ReadingDisplayPage
                   userQuery={userQuery}
                   selectedCards={selectedCards}
-                  setPage={navigateHome}
+                  cardData={CARD_DATA}
+                  setPage={navigateHome} // Pass navigateHome to allow reset
                />;
       case 'about-gerry':
         return <AboutGerryPage />;
@@ -101,4 +101,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
