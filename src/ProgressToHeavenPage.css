@@ -1,0 +1,254 @@
+/* Styles for the Progress to Heaven Page */
+.progress-page {
+    background-color: #0f0c29;
+    color: #faf5ff;
+    padding: 20px;
+}
+
+.progress-page h2 {
+    color: #e9d5ff;
+}
+
+.realm-scroller {
+    width: 100%;
+    height: 70vh; /* Viewport height */
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 2px solid #4c1d95;
+    border-radius: 1rem;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.path-container {
+    position: relative;
+    width: 100%;
+}
+
+.celestial-orb {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background-image: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(253, 224, 71, 0.8) 40%, rgba(255,255,255,0) 70%);
+    transition: all 0.3s ease;
+    pointer-events: all;
+    z-index: 20;
+}
+
+.celestial-orb:hover {
+     transform: translate(-50%, -50%) scale(1.5);
+     z-index: 100;
+}
+
+.orb-tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 101;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+}
+
+.celestial-orb:hover .orb-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Gerry's wrapper is now positioned relative to the path */
+.gerry-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    width: 150px;
+    height: 150px; 
+}
+
+.gerry-character-container {
+    width: 100%; 
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fde047;
+    box-shadow: 0 0 20px 7px rgba(253, 224, 71, 0.5);
+    position: relative;
+}
+
+.gerry-character-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: inset 0 8px 15px rgba(255, 255, 255, 0.3),
+                inset 0 -8px 15px rgba(0, 0, 0, 0.4);
+}
+
+.gerry-character-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* This is the updated part */
+.realm-background {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    /* The image URL is now passed from the JS file */
+    background-image: var(--realm-bg-image);
+    /* This will make the image fit the width of the container */
+    background-size: 100% auto;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.realm-title {
+    color: #fde047;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #fde047, 0 0 5px #000;
+    padding-bottom: 20px;
+    z-index: 12;
+}
+
+.next-realm-message {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fde047;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #fde047;
+    z-index: 30;
+    padding: 10px 20px;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 1rem;
+    white-space: nowrap;
+}
+
+.bg-star {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7);
+    animation: twinkle linear infinite;
+    z-index: 5;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+}
+
+.nebula {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, rgba(138, 43, 226, 0) 70%);
+    border-radius: 50%;
+    z-index: 2;
+    opacity: 0.5;
+}
+
+.progress-text-content {
+    padding: 1rem;
+    max-width: 800px;
+    margin: 1rem auto;
+}
+
+.progress-text-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #d8b4fe;
+    font-size: 1.25rem; /* Added this line to match other pages */
+}
+
+.orb-counter-container {
+    font-size: 1.25rem;
+    margin: 2rem 0;
+    color: #e9d5ff;
+}
+
+.orb-count {
+    font-weight: bold;
+    color: #fde047;
+    font-size: 1.5rem;
+}
+
+.orb-contribution-container, .orb-awarded-message {
+    background-color: rgba(76, 29, 149, 0.4);
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 500px;
+    margin: 2rem auto;
+    border: 1px solid #581c87;
+}
+
+.orb-contribution-container h3, .orb-awarded-message h3 {
+    margin-top: 0;
+    color: #fde047;
+}
+
+.orb-contribution-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.orb-contribution-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #d8b4fe;
+}
+
+.orb-contribution-container input[type="text"] {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    border: 1px solid #a78bfa;
+    background-color: #f3e8ff;
+    color: #333;
+}
+
+.orb-contribution-container input[type="color"] {
+    width: 100%;
+    height: 50px;
+    border: none;
+    padding: 0;
+    border-radius: 0.375rem;
+    cursor: pointer;
+}
+
+.orb-contribution-container button {
+    background-color: #f59e0b;
+    color: #4a148c;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.orb-contribution-container button:hover {
+    background-color: #d97706;
+}

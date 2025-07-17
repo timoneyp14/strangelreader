@@ -97,9 +97,9 @@ body {
     margin-top: 0;
 }
 
-/* --- About Gerry Page Specific Styles (UPDATED) --- */
+/* --- About Gerry Page Specific Styles --- */
 .about-gerry-page .intro-text {
-    text-align: left; /* This ensures the story text is left-aligned */
+    text-align: left;
 }
 
 /* Homepage Card */
@@ -159,6 +159,7 @@ body {
 .subscription-form button {
     background-color: #581c87;
     color: #e9d5ff;
+    font-family: inherit;
 }
 .subscription-form button:hover {
     background-color: #4a148c;
@@ -181,10 +182,12 @@ body {
     width: 100%;
     max-width: 800px;
     aspect-ratio: 16/9;
-    margin: 2rem auto;
+    margin: 1rem auto 2rem;
     background-color: #faf5ff;
     border-radius: 1.5rem;
     overflow: hidden;
+    clip-path: circle(0% at center);
+    animation: iris-in 10s ease-out 2s forwards; 
 }
 .video-responsive {
     position: absolute;
@@ -192,27 +195,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    transform: scale(1.2);
 }
-.well-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    z-index: 5;
-    pointer-events: auto;
-}
-.video-frame {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: inset 0 25px 25px -10px #faf5ff, inset 0 -25px 25px -10px #faf5ff;
-    z-index: 6;
-    pointer-events: none;
-}
+
 /* Query Box */
 .query-box {
   margin-top: 40px;
@@ -251,6 +236,10 @@ body {
     font-weight: bold;
 }
 /* Card Selection Page */
+.card-selection-page {
+    animation: dissolve-in 2s ease-in-out; 
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -282,30 +271,64 @@ body {
     box-shadow: 0 0 20px 5px rgba(253, 224, 71, 0.9);
     border-color: #fde047;
 }
+
+/* --- Page Transition Animations --- */
+@keyframes dissolve-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dissolve-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes iris-in {
+  from {
+    clip-path: circle(0% at center);
+  }
+  to {
+    clip-path: circle(75% at center);
+  }
+}
+
+.dissolving-out {
+    animation: dissolve-out 4s ease-in-out forwards; /* Updated duration */
+}
+
 /* --- Reading Display Page --- */
 .reading-page-bg {
     background-color: #fef3c7;
+    max-width: none; 
+    animation: dissolve-in 4s ease-in-out; /* Updated duration */
 }
 .reading-cards-grid {
     display: grid;
-    gap: 2rem;
-    max-width: 800px;
+    max-width: 1100px;
     margin: 0 auto 3rem;
-    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 .reading-card {
-    width: 300px;
-    height: 450px;
+    width: 100%;
+    aspect-ratio: 2 / 3;
     border-radius: 1rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     background-color: #fff;
     overflow: hidden;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, z-index 0s 0.15s;
     cursor: pointer;
-    margin: 0 auto;
+    position: relative;
+    z-index: 10;
 }
 .reading-card:hover {
     transform: scale(1.05);
+    z-index: 20;
+}
+.reading-card.enlarged {
+    transform: scale(1.5);
+    z-index: 30;
+    transition: transform 0.3s ease-in-out, z-index 0s;
 }
 .reading-card img {
     width: 100%;
@@ -320,7 +343,8 @@ body {
     border-radius: 0.375rem;
     font-size: 1.25rem;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: 2rem; /* Increased margin */
+    margin-bottom: 2rem;
+    font-family: inherit;
 }
 .ask-gerry-button:hover {
     background-color: #581c87;
@@ -333,7 +357,7 @@ body {
   box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   text-align: left;
   white-space: pre-wrap;
-  max-width: 4xl;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   font-size: 1.15rem;
@@ -346,8 +370,10 @@ body {
     background-color: #f59e0b;
     color: #4a148c;
     font-weight: bold;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 0.375rem;
+    font-size: 1.25rem;
+    font-family: inherit;
 }
 .memento-button:hover {
     background-color: #d97706;
@@ -356,9 +382,11 @@ body {
     background-color: #22c55e;
     color: white;
     font-weight: bold;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 0.375rem;
     margin-left: 1rem;
+    font-size: 1.25rem;
+    font-family: inherit;
 }
 .journey-button:hover {
     background-color: #16a34a;
@@ -370,6 +398,7 @@ body {
     font-weight: bold;
     padding: 0.5rem 1rem;
     border-radius: 0.375rem;
+    font-family: inherit;
 }
 .new-reading-button:hover {
     background-color: #4b5563;

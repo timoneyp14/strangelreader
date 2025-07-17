@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { CARD_DATA } from './cardData'; // Import card data
 
 function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage, selectedCards }) {
   const [shuffledCardIds, setShuffledCardIds] = useState([]);
   const cardBackImage = 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/570bdf49-e945-41d5-9d2a-31292377d4c4/IMG_5264.jpeg?format=1500w';
   const [echoMessage, setEchoMessage] = useState('');
+  const [isFadingOut, setIsFadingOut] = useState(false); 
 
-  // This effect runs only once when the component mounts to shuffle the cards
   useEffect(() => {
-    const cardIds = Array.from({ length: 32 }, (_, i) => i + 1);
+    const cardIds = Array.from({ length: CARD_DATA.length }, (_, i) => i + 1);
     
-    // Fisher-Yates shuffle algorithm
     for (let i = cardIds.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [cardIds[i], cardIds[j]] = [cardIds[j], cardIds[i]];
@@ -17,7 +17,6 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
     
     setShuffledCardIds(cardIds);
   }, []);
-
 
   const toggleCardSelection = (cardId) => {
     setSelectedCards(prevSelected => {
@@ -43,14 +42,16 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
 
   useEffect(() => {
     if (selectedCards.length === 4) {
+      setIsFadingOut(true); 
       setTimeout(() => {
         setPage('reading-display');
-      }, 1500);
+        setIsFadingOut(false); 
+      }, 4000); 
     }
   }, [selectedCards, setPage]);
 
   return (
-    <div className="page-container">
+    <div className={`page-container card-selection-page ${isFadingOut ? 'dissolving-out' : ''}`}>
       <header>
         <h1>Gerry's Well of Wisdom</h1>
         <p className="well-text">Ah... you have arrived at Gerry's Well of Wisdom. Enjoy the gentle sway of the golden waters as you gaze into its depths.</p>
@@ -58,23 +59,20 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
       </header>
       <main>
         <div className="well-container">
-            <iframe
+            <video
                 className="video-responsive"
-                src="https://www.youtube.com/embed/dIR8vLuZg_k?autoplay=1&loop=1&playlist=dIR8vLuZg_k&controls=0&mute=1&playsinline=1&modestbranding=1"
-                frameBorder="0"
-                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="Gerry's Well of Wisdom Video"
-            ></iframe>
-            <div className="well-overlay"></div>
-            <div className="video-frame"></div>
+                src="https://firebasestorage.googleapis.com/v0/b/strangel-readings.firebasestorage.app/o/gerrys%20well%20of%20wisdom.mp4?alt=media&token=977da523-1ce4-4eea-aabc-0084d3698b30"
+                autoPlay
+                loop
+                muted
+                playsInline
+            ></video>
         </div>
         
         <p className="well-text">
             Feel free to approach the well with any manner of inquiry. It can be serious or silly, terribly pressing or about trouser pressing. The more information that you tell the well, the more personalised your reading will be.
         </p>
         <p className="well-text italic">Rest assured, your words are whispered only to the well. They are heard once for your reading, then vanish into the mists.</p>
-
         <div className="query-box">
           <textarea
             value={userQuery}
@@ -85,7 +83,6 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
           <button onClick={handleTellTheWell}>Tell The Well</button>
           {echoMessage && <p className="echo-message">{echoMessage}</p>}
         </div>
-
         <h2 style={{marginTop: '2rem'}}>Choose four cards.</h2>
         <p>Selected: {selectedCards.length} of 4</p>
         <div className="card-grid">
@@ -103,6 +100,4 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
     </div>
   );
 }
-
 export default CardSelectionPage;
-

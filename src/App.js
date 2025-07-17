@@ -1,28 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import HomePage from './HomePage';
 import CardSelectionPage from './CardSelectionPage';
 import ReadingDisplayPage from './ReadingDisplayPage';
-import { CARD_DATA } from './cardData'; // Import the card data
+import ProgressToHeavenPage from './ProgressToHeavenPage'; // Import the new component
+import './ProgressToHeavenPage.css'; // Import the new CSS
+import { CARD_DATA } from './cardData';
 
 // --- Placeholder Pages ---
 const AboutGerryPage = () => (
     <div className="page-container about-gerry-page">
         <h1>Archangel Gerry's Story</h1>
-        {/* The className="intro-text" has been added to both paragraphs */}
         <p className="intro-text">
             Once, in a time not so long ago, Gerry walked the Earth as a human. He wasn't a tremendously brilliant human, and led, what could perhaps best be described as a ne'er-do-well existence. However, in the last few seconds of his life, a child darted into the path of an oncoming vehicle. In that instant, all the noise of Gerry's life muted, and there was only a single, clear and noble choice. He intervened, dived into the road and pushed the child to safety. Gerry was killed in the process. His soul, unburdened by the chance to second-guess, felt a profound sense of peace. He had, without question or regret, finally done something true.
         </p>
         <p className="intro-text">
             When Saint Peter met Gerry at the gates of Heaven, he couldn't, in good conscience, turn him away. Despite Gerry's prior existence, it wouldn't be proper to ignore his final act of self-sacrifice and bravery. So, Saint Peter offered Gerry a chance to earn his way to Heaven: by collaborating with Paul Timoney and sharing the strange and crooked wisdom he'd gathered from a life lived in the margins. And so, Archangel Gerry was born, continuing his mission to offer guidance and a weird, fresh perspective to all who seek it.
         </p>
-    </div>
-);
-
-const ProgressToHeavenPage = () => (
-    <div className="page-container">
-        <h1>Progress to Heaven</h1>
-        <p>This page will show Gerry's journey to the heavens.</p>
     </div>
 );
 
@@ -55,12 +49,12 @@ function App() {
   const [userQuery, setUserQuery] = useState('');
   const [selectedCards, setSelectedCards] = useState([]);
 
-  // Function to reset the state for a new reading
-  const navigateHome = () => {
-      setUserQuery('');
-      setSelectedCards([]);
-      setPage('home');
-  }
+  useEffect(() => {
+    if (page !== 'reading-display' && page !== 'well-of-wisdom') {
+        setUserQuery('');
+        setSelectedCards([]);
+    }
+  }, [page]);
 
   const renderPage = () => {
     switch (page) {
@@ -77,12 +71,12 @@ function App() {
                   userQuery={userQuery}
                   selectedCards={selectedCards}
                   cardData={CARD_DATA}
-                  setPage={navigateHome} // Pass navigateHome to allow reset
+                  setPage={setPage}
                />;
       case 'about-gerry':
         return <AboutGerryPage />;
       case 'progress-to-heaven':
-        return <ProgressToHeavenPage />;
+        return <ProgressToHeavenPage />; // Render the new, real component
       case 'home':
       default:
         return <HomePage
