@@ -198,7 +198,28 @@ body {
     transform: scale(1.2);
 }
 
-/* Query Box */
+/* --- New Ripple Effect --- */
+.well-container.ripple-effect::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: rgba(253, 224, 71, 0.5);
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  to {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+/* --- Query Box Effects --- */
 .query-box {
   margin-top: 40px;
   padding: 2rem;
@@ -209,7 +230,32 @@ body {
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease-in-out;
 }
+
+.query-box.focused {
+    animation: pulse-glow 2s infinite alternate;
+}
+
+.query-box.fading-text textarea {
+    animation: fade-out-text 2s forwards;
+}
+
+@keyframes pulse-glow {
+    from {
+        box-shadow: 0 0 5px #c084fc, 0 0 10px #c084fc;
+    }
+    to {
+        box-shadow: 0 0 20px #a855f7, 0 0 30px #a855f7;
+    }
+}
+
+@keyframes fade-out-text {
+    to {
+        opacity: 0;
+    }
+}
+
 .query-box textarea {
     width: 95%;
     padding: 1rem;
@@ -293,14 +339,14 @@ body {
 }
 
 .dissolving-out {
-    animation: dissolve-out 4s ease-in-out forwards; /* Updated duration */
+    animation: dissolve-out 4s ease-in-out forwards;
 }
 
 /* --- Reading Display Page --- */
 .reading-page-bg {
     background-color: #fef3c7;
     max-width: none; 
-    animation: dissolve-in 4s ease-in-out; /* Updated duration */
+    animation: dissolve-in 4s ease-in-out; 
 }
 .reading-cards-grid {
     display: grid;

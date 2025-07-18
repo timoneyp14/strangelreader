@@ -5,7 +5,12 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
   const [shuffledCardIds, setShuffledCardIds] = useState([]);
   const cardBackImage = 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/570bdf49-e945-41d5-9d2a-31292377d4c4/IMG_5264.jpeg?format=1500w';
   const [echoMessage, setEchoMessage] = useState('');
-  const [isFadingOut, setIsFadingOut] = useState(false); 
+  const [isFadingOut, setIsFadingOut] = useState(false);
+  
+  // --- New states for magical effects ---
+  const [isQueryFading, setIsQueryFading] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [showRipple, setShowRipple] = useState(false);
 
   useEffect(() => {
     const cardIds = Array.from({ length: CARD_DATA.length }, (_, i) => i + 1);
@@ -34,9 +39,18 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
   const handleTellTheWell = () => {
       if (userQuery.trim()) {
           setEchoMessage('Your words echo back in a voice that is not your own.');
+          setIsQueryFading(true); // Start fading the text
+          setShowRipple(true); // Trigger the ripple effect
+
           setTimeout(() => {
               setEchoMessage('');
-          }, 4000);
+              setUserQuery(''); // Clear the text after it has faded
+              setIsQueryFading(false); // Reset fading state
+          }, 2000); // Duration of the fade animation
+
+          setTimeout(() => {
+            setShowRipple(false); // Remove ripple class after its animation
+          }, 1000);
       }
   };
 
@@ -58,7 +72,7 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
         <p className="well-text">You may share with the well a topic or question that you would like to explore through your reading. Or you can choose your cards in contemplative silence and trust that Archangel Gerry and Gemini will intuit what you most need to know.</p>
       </header>
       <main>
-        <div className="well-container">
+        <div className={`well-container ${showRipple ? 'ripple-effect' : ''}`}>
             <video
                 className="video-responsive"
                 src="https://firebasestorage.googleapis.com/v0/b/strangel-readings.firebasestorage.app/o/gerrys%20well%20of%20wisdom.mp4?alt=media&token=977da523-1ce4-4eea-aabc-0084d3698b30"
@@ -73,16 +87,20 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
             Feel free to approach the well with any manner of inquiry. It can be serious or silly, terribly pressing or about trouser pressing. The more information that you tell the well, the more personalised your reading will be.
         </p>
         <p className="well-text italic">Rest assured, your words are whispered only to the well. They are heard once for your reading, then vanish into the mists.</p>
-        <div className="query-box">
+        
+        <div className={`query-box ${isFocused ? 'focused' : ''} ${isQueryFading ? 'fading-text' : ''}`}>
           <textarea
             value={userQuery}
             onChange={(e) => setUserQuery(e.target.value)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
             rows="6"
             placeholder="Type your question or topic here..."
           />
           <button onClick={handleTellTheWell}>Tell The Well</button>
           {echoMessage && <p className="echo-message">{echoMessage}</p>}
         </div>
+
         <h2 style={{marginTop: '2rem'}}>Choose four cards.</h2>
         <p>Selected: {selectedCards.length} of 4</p>
         <div className="card-grid">

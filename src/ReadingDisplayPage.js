@@ -5,42 +5,49 @@ const Loader = () => <div className="loader"></div>;
 
 function ReadingDisplayPage({ userQuery, selectedCards, cardData, setPage }) {
     const [interpretation, setInterpretation] = useState('');
+    const [memento, setMemento] = useState(''); // New state for the memento summary
     const [isLoading, setIsLoading] = useState(false);
-    const [enlargedCard, setEnlargedCard] = useState(null); // State to track enlarged card
+    const [enlargedCard, setEnlargedCard] = useState(null);
 
-    // Filter the main card data to get the details of the selected cards
     const readingCards = cardData.filter(card => selectedCards.includes(card.id));
 
     const handleCardClick = (cardId) => {
-        // If the clicked card is already enlarged, shrink it. Otherwise, enlarge it.
         setEnlargedCard(enlargedCard === cardId ? null : cardId);
     };
 
     const getInterpretation = async () => {
         setIsLoading(true);
         setInterpretation('');
+        setMemento('');
+
+        // --- New, Simplified Prompt Generation Logic ---
 
         const cardDetails = readingCards.map(card => `* ${card.name}: which represents '${card.interpretationPrompt}'`).join('\n');
         
-        let prompt = `You are Archangel Gerry. A seeker has presented you with the following cards:\n${cardDetails}\n\n`;
-        
+        let prompt = `
+Imagine you had to use these cards to create a really useful piece of life advice for someone who needs it. Create a 500-word text as if you, Gemini, had consulted with a great, kind, wise, and lighthearted sage named Archangel Gerry, who lives in the golden waters of his well of wisdom.
+
+The reading should be a summary of your consultation. It can be a dialogue or a unified voice. The tone must be insightful, empathetic, caring, and genuinely useful. Avoid simple platitudes.
+
+The seeker has drawn these four cards:
+${cardDetails}
+        `;
+
         if (userQuery) {
-            prompt += `They are seeking wisdom on the topic of: "${userQuery}". Please provide your wise, whimsical, and insightful interpretation, weaving together the specific meanings of these cards to address the seeker's query.`;
+            prompt += `\nThey have specifically asked for guidance on: "${userQuery}". Please try to address that question in a helpful and empathic way, using the cards as your guide.`;
         } else {
-            prompt += "Please provide a general but wise, whimsical, and insightful reading based on the combination of these four cards."
+            prompt += `\nThey have not asked a question, so please use the cards as your sole guide to provide the wisdom they most need to hear.`;
         }
-        prompt += " Keep the reading to about 3-4 paragraphs."
+
+        prompt += `\n\nAfter the main reading, on a new line, provide a single, unique sentence that encapsulates the core wisdom of this specific reading. Start this line with "Memento:".`;
 
         try {
-            const chatHistory = [{ role: "user", parts: [{ text:prompt }] }];
-            const payload = { contents: chatHistory };
-            const apiKey = ""; // API key will be injected by the environment
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            const apiUrl = 'http://localhost:5001/get-reading'; // Point to the backend
             
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: JSON.stringify({ prompt })
             });
 
             if (!response.ok) {
@@ -49,18 +56,51 @@ function ReadingDisplayPage({ userQuery, selectedCards, cardData, setPage }) {
 
             const result = await response.json();
             
-            if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
-                setInterpretation(result.candidates[0].content.parts[0].text);
+            if (result.text) {
+                const fullText = result.text;
+                const parts = fullText.split("\nMemento:");
+                setInterpretation(parts[0].trim());
+                if (parts.length > 1) {
+                    setMemento(parts[1].trim());
+                } else {
+                    setMemento("May your path be strange and wonderful.");
+                }
             } else {
-               setInterpretation("Gerry seems to be at a loss for words. Please try again.");
+               setInterpretation("Gerry and Gemini seem to be in a deep consultation. Please try again in a moment.");
             }
         } catch (error) {
             console.error("Error fetching interpretation:", error);
-            setInterpretation("It seems there was a disturbance in the cosmic connection to Gerry. Please check your connection and try again.");
+            setInterpretation("It seems there was a disturbance in the cosmic connection. Please check your connection and try again.");
         } finally {
             setIsLoading(false);
         }
     };
+    
+    const createMemento = () => {
+        if (!memento) return;
+
+        const cardImagesHTML = readingCards.map(card => `
+            <div style="width: 200px; height: 300px; margin: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 1rem; overflow: hidden;">
+                <img src="${card.imageSrc}" alt="${card.name}" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        `).join('');
+
+        const mementoHTML = `
+            <html><head><title>Your Strangel Reading Memento</title><style>
+            body { font-family: "Georgia", "Times New Roman", serif; background-color: #FEF3C7; text-align: center; padding: 2rem; }
+            h1 { color: #581c87; } .cards-container { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 2rem; }
+            .quote { font-style: italic; font-size: 1.25rem; margin-top: 2rem; color: #581c87; max-width: 600px; margin-left: auto; margin-right: auto; }
+            .print-button { margin-top: 2rem; padding: 0.75rem 1.5rem; font-size: 1rem; color: white; background-color: #7e22ce; border: none; border-radius: 0.5rem; cursor: pointer; }
+            @media print { .print-button { display: none; } }
+            </style></head><body><h1>Your Strangel Reading</h1><div class="cards-container">${cardImagesHTML}</div>
+            <p class="quote">"${memento}"</p><button class="print-button" onclick="window.print()">Print Memento</button></body></html>
+        `;
+
+        const newWindow = window.open("", "_blank");
+        newWindow.document.write(mementoHTML);
+        newWindow.document.close();
+    };
+
 
     return (
         <div className="page-container reading-page-bg">
@@ -73,7 +113,6 @@ function ReadingDisplayPage({ userQuery, selectedCards, cardData, setPage }) {
                     {readingCards.map(card => (
                         <div 
                             key={card.id} 
-                            // Add the 'enlarged' class if this card is the one selected
                             className={`reading-card ${enlargedCard === card.id ? 'enlarged' : ''}`}
                             onClick={() => handleCardClick(card.id)}
                         >
@@ -96,7 +135,7 @@ function ReadingDisplayPage({ userQuery, selectedCards, cardData, setPage }) {
                             {interpretation}
                         </div>
                         <div className="post-reading-options">
-                             <button className="memento-button" onClick={() => alert('Memento feature coming soon!')}>
+                             <button className="memento-button" onClick={createMemento}>
                                 Save a Memento
                             </button>
                              <button className="journey-button" onClick={() => setPage('progress-to-heaven')}>
