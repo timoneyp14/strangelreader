@@ -7,10 +7,10 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
   const [echoMessage, setEchoMessage] = useState('');
   const [isFadingOut, setIsFadingOut] = useState(false);
   
-  // --- New states for magical effects ---
-  const [isQueryFading, setIsQueryFading] = useState(false);
+  // States for magical effects
   const [isFocused, setIsFocused] = useState(false);
   const [showRipple, setShowRipple] = useState(false);
+  const [isWellTold, setIsWellTold] = useState(false); // New state to track if well has been told
 
   useEffect(() => {
     const cardIds = Array.from({ length: CARD_DATA.length }, (_, i) => i + 1);
@@ -36,20 +36,21 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
     });
   };
 
+  // This function is now simplified to be more robust
   const handleTellTheWell = () => {
       if (userQuery.trim()) {
+          setIsWellTold(true); // Disable the button after clicking
           setEchoMessage('Your words echo back in a voice that is not your own.');
-          setIsQueryFading(true); // Start fading the text
           setShowRipple(true); // Trigger the ripple effect
 
+          // Hide the echo message after a few seconds
           setTimeout(() => {
               setEchoMessage('');
-              setUserQuery(''); // Clear the text after it has faded
-              setIsQueryFading(false); // Reset fading state
-          }, 2000); // Duration of the fade animation
+          }, 4000);
 
+          // Reset the ripple effect class
           setTimeout(() => {
-            setShowRipple(false); // Remove ripple class after its animation
+            setShowRipple(false);
           }, 1000);
       }
   };
@@ -88,7 +89,7 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
         </p>
         <p className="well-text italic">Rest assured, your words are whispered only to the well. They are heard once for your reading, then vanish into the mists.</p>
         
-        <div className={`query-box ${isFocused ? 'focused' : ''} ${isQueryFading ? 'fading-text' : ''}`}>
+        <div className={`query-box ${isFocused ? 'focused' : ''}`}>
           <textarea
             value={userQuery}
             onChange={(e) => setUserQuery(e.target.value)}
@@ -96,8 +97,11 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
             onBlur={() => setIsFocused(false)}
             rows="6"
             placeholder="Type your question or topic here..."
+            readOnly={isWellTold} // Make textarea readonly after sending
           />
-          <button onClick={handleTellTheWell}>Tell The Well</button>
+          <button onClick={handleTellTheWell} disabled={isWellTold}>
+            {isWellTold ? 'The Well is Listening...' : 'Tell The Well'}
+          </button>
           {echoMessage && <p className="echo-message">{echoMessage}</p>}
         </div>
 
