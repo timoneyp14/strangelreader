@@ -8,21 +8,21 @@ function ProgressToHeavenPage() {
     // --- State Management ---
     const [orbs, setOrbs] = useState([]);
     const [orbName, setOrbName] = useState('');
-    const [orbColor, setOrbColor] = useState('#fde047'); // Default to a golden color
+    const [orbColor, setOrbColor] = useState('#fde047');
     const [hasAwardedOrb, setHasAwardedOrb] = useState(sessionStorage.getItem('hasAwardedOrb') === 'true');
     const [db, setDb] = useState(null);
     const [userId, setUserId] = useState(null);
     const [appId, setAppId] = useState('default-app-id');
     const scrollerRef = useRef(null);
 
-    // --- Data for Realms ---
+    // --- Data for Realms (CORRECTED TRIGGER VALUES) ---
     const REALMS = [
         { name: 'The Earthly Sky', trigger: 0, url: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/e1efda68-76e6-4f2a-941c-e6904c821d42/realm-earth.jpg?format=1500w' },
-        { name: 'The Realm Of Flying Friends', trigger: 10, url: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/4ed640ce-fbfd-471b-9d41-8806d12f8fe4/IMG_5302.jpeg?format=1500w' },
-        { name: 'The Murmuring Mangroves', trigger: 25, url: 'https://i.imgur.com/D45n2J5.png' },
-        { name: 'The Plains of the Mooborus', trigger: 50, url: 'https://i.imgur.com/rDRx5g2.png' },
-        { name: 'The Sea of Stillness', trigger: 75, url: 'https://i.imgur.com/pZ3gA8p.png' },
-        { name: 'The Celestial Band Hall', trigger: 100, url: 'https://i.imgur.com/L4yYf9C.png'}
+        { name: 'The Realm Of Flying Friends', trigger: 200, url: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/4ed640ce-fbfd-471b-9d41-8806d12f8fe4/IMG_5302.jpeg?format=1500w' },
+        { name: 'The Murmuring Mangroves', trigger: 400, url: 'https://i.imgur.com/D45n2J5.png' },
+        { name: 'The Plains of the Mooborus', trigger: 600, url: 'https://i.imgur.com/rDRx5g2.png' },
+        { name: 'The Sea of Stillness', trigger: 800, url: 'https://i.imgur.com/pZ3gA8p.png' },
+        { name: 'The Celestial Band Hall', trigger: 1000, url: 'https://i.imgur.com/L4yYf9C.png'}
     ];
     const REALM_HEIGHT = 2400;
 
@@ -134,10 +134,8 @@ function ProgressToHeavenPage() {
     
     let nextRealm = REALMS.find(realm => orbs.length < realm.trigger);
 
-    // --- DYNAMIC POSITIONING FOR GERRY ---
-    let gerryTopPosition = totalHeight - 170; // Default position at the bottom if no orbs
+    let gerryTopPosition = totalHeight - 170; 
     if (orbs.length > 0) {
-        // Position Gerry just above the newest (last) orb
         const lastOrbTop = totalHeight - ((orbs.length - 1) * stepHeight) - 150;
         gerryTopPosition = lastOrbTop - 160; 
     }
@@ -186,11 +184,10 @@ function ProgressToHeavenPage() {
                         </div>
                     ))}
                     {nextRealm && (
-                        <div className="next-realm-message" style={{ top: `${totalHeight - (orbs.length * stepHeight) - 250}px` }}>
+                        <div className="next-realm-message" style={{ top: `${gerryTopPosition - 80}px` }}>
                             Next realm in {nextRealm.trigger - orbs.length} orbs...
                         </div>
                     )}
-                    {/* Gerry is now inside the path container and positioned dynamically */}
                     <div className="gerry-wrapper" style={{ top: `${gerryTopPosition}px` }}>
                         <div className="gerry-character-container">
                             <img src="https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/d8776412-80a8-48a1-8a38-26823eacaf50/IMG_5297.jpeg?format=1500w" alt="Archangel Gerry" />

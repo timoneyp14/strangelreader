@@ -1,34 +1,450 @@
+// src/cardData.js
+// This file contains all the data for the 36 Strangel Cards.
+
 export const CARD_DATA = [
-    { id: 1, name: 'Hoof! Hoof!', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/75a4e9c6-ef2e-4df1-9d48-f79a40739b26/IMG_5263.jpeg?format=1000w', alt: 'Strangel Card 1', interpretationPrompt: "Batman is saying 'hoof' 'hoof' through the eyeholes of his upside down mask. Batman is a hero but is human too." },
-    { id: 2, name: 'Dog Headed Spider Alien', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/1b0d96f6-ab13-4fc8-b80d-53e469ba2929/IMG_5262.jpeg?format=1000w', alt: 'Strangel Card 2', interpretationPrompt: 'The Dog Headed Spider Alien gazes at the outline of a person who is suprised and shocked and does not know what will happen next.' },
-    { id: 3, name: 'The Last Few Little Scrapes From The Custard Dish Of Time', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/a84e68b7-f515-45b5-a9a6-de215cc7bee4/IMG_5258.jpeg?format=1000w', alt: 'Strangel Card 3', interpretationPrompt: "There are two elderly looking people, a man and a woman holding onto the outside of a bowl of mostly eaten custard. the text on the picture reads 'The last few little scrapes from the custard bowl of time.' Are the people trying to climb in or out. Who ate the custard." },
-    { id: 4, name: 'The Whispering Teapot Of Far Gotten Dreams', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/c9611c72-7e84-4dd2-96ce-749d1572ceb8/IMG_5257.jpeg?format=1000w', alt: 'Strangel Card 4', interpretationPrompt: "The text reads 'The whispering teapot of far gotten plans.' The plans are far gotten rather than forgotten. There are little images in the steam from the teapot's spout such as a half made sandcastle an incomplee sketch of a guitar being played, a worn map whose x could mark a destination that is as yet undiscovered. there is also an eye peeking out from beneath a set of purple curtains." },
-    { id: 5, name: 'Portrait of A Goose Who Wears A Tie Made Out Of Gold', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/b4d3c572-549b-48b7-a9d3-117711f3cc39/IMG_5256.jpeg?format=1000w', alt: 'Strangel Card 5', interpretationPrompt: "The text reads 'portrait of a goose who wears a tie made out of gold. The goose has a glowing yellow or gold tie. The portrait of the goose is the one speaking the words in the text. The goose has a sword which is concealed behind his back. It is not made out of gold. The portrait is on an easal." },
-    { id: 6, name: 'An Ice Cold Woman With An Autumn Flavoured Fish Eye Washes the Mountain From Under Her Nails', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/d6c171d8-8364-45b9-ac30-2eba29754184/IMG_5252.jpeg?format=1000w', alt: 'Strangel Card 6', interpretationPrompt: 'A woman who looks a little bit perturbed is saying, \'an ice cold woman with an autumn flavoured fish eye washes the mountain from under her nails.\'' },
-    { id: 7, name: 'The Hugged Hippo Leaves His Interests On Show', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/c4af4978-1b13-432d-b7c0-1adf09e9cdb2/IMG_5251.jpeg?format=1000w', alt: 'Strangel Card 7', interpretationPrompt: 'There are two people mounted on a donkey, riding it like a horse and there are many sets of arms, some of which are disembodied or maybe not physical but ethereal arms, perhaps representing spiritual hugs and rubs of affection. The text which is in a speech bubble coming from the hippo says \'the hugged hippo leaves his interests on show.' },
-    { id: 8, name: 'The Moment You Most Dread May Yet Be The Best Beginning', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/cbd4dde7-eb6d-47b0-85a9-b3e81a8ccd1f/IMG_5249.jpeg?format=1000w', alt: 'Strangel Card 8', interpretationPrompt: "The words say 'The moment you most dread may yet be the best beginning.' There is a little abstract image of a person dancing or stretching around some of the words. There is also a little sketch of a crown and a little abstract shape." },
-    { id: 9, name: 'Give Me Back My Face', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/244e137e-5a5f-491b-a7d3-51afc0d95bc1/IMG_5248.jpeg?format=1000w', alt: 'Strangel Card 9', interpretationPrompt: "She is saying 'Give me back my face' and she is looming large over a castle wall with a gate and turrets. There are transparent but visible facial features on or in the castle wall. There are eyes and ears, an upper and lower lip and a nose." },
-    { id: 10, name: 'The Four of Headless Hedgehogs', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/75eaf307-b714-4617-a6e0-bf89097ad5ee/IMG_5247.jpeg?format=1000w', alt: 'Strangel Card 10', interpretationPrompt: 'There are four simply drawn headless hedgehogs and the number 4 is written in the left upper and right lower corner, very much like a standard playing card, but with headless hedgehogs.' },
-    { id: 11, name: 'What Point In The Wearing Of A Mask That Does Not Fit?', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/e4d994b1-36c3-47ae-a619-baa5caea5cc1/IMG_5246.jpeg?format=1000w', alt: 'Strangel Card 11', interpretationPrompt: "On his forehead are written the words 'what point in the wearing of' and from the mouth of the mask, 'a mask that does not fit. The mask is colourful. The man's eyes are large and green. The mask has a big blue pompadour hairstyle and there is a man and woman sitting back to back on the masks head and in its hair." },
-    { id: 12, name: 'Why Honk Not At The Ghost Ship?', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/510cc2bb-0b60-4ec2-bd83-52547fd06fac/IMG_5245.jpeg?format=1000w', alt: 'Strangel Card 12', interpretationPrompt: "It is a silhouette with some lights in the windows. there are some strange spectral happenings happening around it. there is an aberrated pink fish or maybe a shark in the water. The text says, 'Why honk not at the ghost ship?'" },
-    { id: 13, name: 'The Past Should Not Wreck the Future. I Used To Work For A Piece Of Burnt Toast', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/7dc2e5d2-e67a-45b6-b7a6-0f2ea2c55e7f/IMG_5244.jpeg?format=1000w', alt: 'Strangel Card 13', interpretationPrompt: "It has a green and yellow four legged figure with a human head and a goatee beard saying 'I used to work for a piece of burnt toast.' There is large text written over him which says 'the past shouldn't wreck the future.'" },
-    { id: 14, name: 'I Punched Reality So Hard That A Tree Grew From My Fist', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/112120ff-a4f0-4c24-97fa-8afd9a6809f8/IMG_5243.jpeg?format=1000w', alt: 'Strangel Card 14', interpretationPrompt: "He has a tree stump for a nose. He is wearing a red and blue jumper covered in a geometric pattern of circles. There is a cosmic light emanating from his knuckles and a tree seeming to appear from his fist. He is saying 'I punched Reality so hard that a tree grew from my fist.'" },
-    { id: 15, name: 'Your Words Worn Written On A Hat On Your Head', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/f88f4b95-b737-4b1a-98d8-1d8e1ec27673/IMG_5242.jpeg?format=1000w', alt: 'Strangel Card 15', interpretationPrompt: "A white haired man with a lantern jaw who is wearing a wooden barrel smiling and saying 'Your words worn written on a hat on your head.' The speech bubble that the words are in is emanating from his mouth and making a hat shape on his head." },
-    { id: 16, name: 'I Love Your Blood. I Love Your Skeleton', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/66116247-a31a-4992-ae90-25c19f3aaf29/IMG_5241.jpeg?format=1000w', alt: 'Strangel Card 16', interpretationPrompt: 'A picture of a woman drawn in an energetic an scribbly way. She is passionate. Her arm is raised. She has an open palm with what looks like a flower shaped light inside it and a very small golden book rising up her sleeve towards her wrist. Some of the background behind her can be seen through her face. She is saying \'I love your blood. I love your skeleton.\' There is a little mistake in the writing that is scribbled out.' },
-    { id: 17, name: 'Show Me How To Be Fearless And Accept Myself', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/ec124243-c311-425e-989e-f25e119e861a/IMG_5240.jpeg?format=1000w', alt: 'Strangel Card 17', interpretationPrompt: 'A closeup of a cross looking face. It could be a man or woman but it looks a bit more like a woman. She is saying \'show me how to be fearless and accept myself.\' if you look closely into her eyes you can see the reflection of a candle in one of her eyes and a flower in the other. She has sharp brown teeth and a wrinkly lower lip. There may be tears of frustration or beads of sweat on her cheeks.' },
-    { id: 18, name: 'Bless All Those That Fall From The Bridge Between Mine Ears', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/735dda44-ec76-48ef-b857-86d2ec0bc72f/IMG_5239.jpeg?format=1000w', alt: 'Strangel Card 18', interpretationPrompt: "It is a picture of a rabbit with long ears. There is a bridge, or a silhouette of a rope bridge stretching from the tip of one ear to the other. A man in blue underpants has fallen from the bridge and has a long way to land upon the rabbit's grey head, which is granite coloured, but might have fur. The rabbit is saying 'bless all those that fall from the bridge between mine ears.'" },
-    { id: 19, name: 'A Naked Man With A Luscious Mullet Sings You The Song Of Your Dreams', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/1d49ef73-e0d0-4051-99ad-3d7fc9c94794/IMG_5238.jpeg?format=1000w', alt: 'Strangel Card 19', interpretationPrompt: 'It is a very simple picture of a man with a luscious blonde mullet hairstyle. He has blue eyes. He is saying, "a naked man with a luscious mullet sings you the song of your dreams."' },
-    { id: 20, name: 'Sweet, Come And Prickle Yourself Against My Misery. The Boundaried Goose Has Wisdom To Spare', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/f24c4b4f-3468-4995-afe5-db5a8f6b1a05/IMG_5237.jpeg?format=1000w', alt: 'Strangel Card 20', interpretationPrompt: "It is a picture of a man who is making himself scarce as adark haired woman says, 'Sweet, come and prickle yourself against my misery.' she has a black jagged shape emanating from her torso. His giving her short shrift and saying 'no'. on his leg the words 'the boundaried goose has wisdom to spare.'" },
-    { id: 21, name: 'The Power To Generate Emptiness', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/289bf169-4e3c-4f3d-898d-da92d80aa20c/IMG_5236.jpeg?format=1000w', alt: 'Strangel Card 21', interpretationPrompt: 'it has a lilac teapot with a purple handle and lid pouring nothingness from a perhaps broken spout into a cup. The teapot has legs wearing green trousers and pale yellow shoes. there is what looks like the remains of a broken spout on the ground. Nothingness is pouring from the two feet into two more cups. the whole scene is quite calm.' },
-    { id: 22, name: 'Loom In Essence', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/4f65c90d-f7e8-48cd-afa2-243eb6e57ec8/IMG_5235.jpeg?format=1000w', alt: 'Strangel Card 22', interpretationPrompt: "It is a picture of an oversised head on two small legs, though it could also be a view of looking down from above at someone looking up. the expression on the face is a little forlorn and a little surprised. The whole drawing is made of black line on purple. It's strange to look at and coulfd be interpreted in a few different ways." },
-    { id: 23, name: 'The Flame Of Hope Burns Those That Doubt Her', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/3e8f1c4b-b186-4924-8199-60e340acc957/IMG_5234.jpeg?format=1000w', alt: 'Strangel Card 23', interpretationPrompt: "There is a person dressed in green, white and orange with their hand out holding a flame. the flame is a face with a mouth blowing a second flame.There is another disembodied hand and forearm floating nearby. The words that the person is saying are 'the flame of hope' then the flame coming out of the other flame's mouth has 'burns those that doubt her' written on it. The hovering disembodied arm is saying 'unreasonable' and 'why?'" },
-    { id: 24, name: 'I Do Not Wish You Ever Be Imaginary', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/5fdf45e7-71e7-4cee-9f92-fc5c2d20b9dd/IMG_5233.jpeg?format=1000w', alt: 'Strangel Card 24', interpretationPrompt: "There are two people in it and maybe a third. they might not be people at all. One has a bird's beak and a long neck. He is pointing at the words coming from the other fellow's mouth, like a teacher pointing at a blackboard. The words say 'I do not wish you ever be imaginary.' There is a purple circular shape between them and some pink marks. there is a smaller more difficult to notice character who looks like a cross between a bird, a person, a puppet, and a flower. He is reaching out to touch a hasyily scribbled fish with no fins and a yellow eye. The fish has a tongue that is reaching out to touch the man who is speaking." },
-    { id: 25, name: 'Please Do Not Shield My Petals From The Snow', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/4c1ed2a9-3c34-45f7-b2dc-0fd5fa1f4386/IMG_5232.jpeg?format=1000w', alt: 'Strangel Card 25', interpretationPrompt: "it is a picture of two flowers in a snowy winter scene. One flower is taller than the other so it is bending over to shelter the less tall flower. There is a speech bubble with the words 'please don't shield my petals from the snow' inside it. However if the viewer pays attention they will notice that the speech bubble is coming from one of the falling snowflakes, not from the flower that is being protected. the flower that is being protected has its petals arranged in a mohican hairstyle and it looks quite surprised. there are snowy mountains in the background." },
-    { id: 26, name: 'Spider', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/6dcac9e2-db00-48d7-887e-6f119f76a92b/IMG_5231.jpeg?format=1000w', alt: 'Strangel Card 26', interpretationPrompt: "a picture of a person walking near a small lake that has two large brown Autumnal trees upon its shore. The woman has legs for arms and legs for legs and one extra leg too. She has a green glass bottle of some kind on her torso. she has a string tied to one of five shoes that is attached to a half transparent shape with a drawing of a spider on it. The word 'spider' is written under the spider. Her expression is a bit confused." },
-    { id: 27, name: 'Con-Template', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/a0a55eb4-c474-4948-a8e6-b6bee978480f/IMG_5230.jpeg?format=1000w', alt: 'Strangel Card 27', interpretationPrompt: "a picture of a head with six hands growing out of it. The hands may represent thoughts. One hand is holding a simple flower. Another is holding a tree another is holding a yellow car which looks a bit like an American taxi cab. There are patterns on the face, but most of the face is covered over with a four legged man who looks like he might be running. He has a blue-green transparent head. He is looking at the viewer. He says 'Con-Template' There is another strange little character in the bottom corner who looks like he might be made out of drainpipes. He is barely noticeable." },
-    { id: 28, name: 'Are You Really Tied Up Or Just Pressing Your Hands Together?', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/0ba72af3-16a9-447f-b2b0-02551ebcaad4/IMG_5229.jpeg?format=1000w', alt: 'Strangel Card 28', interpretationPrompt: "a picture of a person with their hands behind their back. They have red hair in a ponytail and the sides of their head are shaved. Their face looks a bit like a mask, but that might be just the way that it is drawn. Their wrists are pressed togther and they do have something on their wrists. it's not clear if those things are bracelets or rope. It's ver hard to say. they have a speech bubble coming from their mouth that looks like a penguin. The words in the speech bubble are 'are you really tied up or just pressing your hands together?'" },
-    { id: 29, name: 'Black Flames Ooze From The House Without Windows', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/986e8303-6f67-4d88-8a67-043d57369381/IMG_5227.jpeg?format=1000w', alt: 'Strangel Card 29', interpretationPrompt: "says 'Black flames ooze from the house without windows. There is a picture of a small house with a red door and a blue roof with black colour coming from the roof. In the orange sky there is a big sun or moon. The ground beneath the house is black too." },
-    { id: 30, name: 'A Pause Upon The Battlefield For Questions', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/638965fa-4858-4b5d-81a1-8c7c03d35a7b/IMG_5288.jpeg?format=1000w', alt: 'Strangel Card 30', interpretationPrompt: "it's a picture of a big person in pastel green trousers and pink shoes. they are holding a scary looking dagger. they have a castlle tower for a head and a castle doorway for a mouth. They have turrets for hair.They have their hand up like a child in school. They are saying 'a pause upon the battlefield for questions.'" },
-    { id: 31, name: 'The Last Act Of Rebellion Is Kindness', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/987b2bd3-620c-46f5-949c-2ba1a4c903a6/IMG_5286.jpeg?format=1000w', alt: 'Strangel Card 31', interpretationPrompt: "it has a picture of one head made of two people. there is a hill in the foreground with a soldier wearing a helmet. He has his booted foot propped up on a tank with a flower growing from its missile launcher. The words on the card read 'the last act of rebellion is kindness." },
-    { id: 32, name: 'The ReSorceress', imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/c0044d8c-476e-45e3-87b0-114b1e88de88/IMG_5285.jpeg?format=1000w', alt: 'Strangel Card 32', interpretationPrompt: "it is about a person who is so resourceful that they might seem magical like a sorceress. In the image there is a woman suspended in a block of ice which must have frozen suddenly because she looks like she was caught in the middle of a jump. her breath is all she has to try to melt the ice and set herself free. In spite of her predicament she looks quite unfazed. Her breath looks like dragon breath with a bit of mystical colout thrown in." }
-];
+  {
+    id: 1,
+    name: 'Hoof! Hoof!',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/75a4e9c6-ef2e-4df1-9d48-f79a40739b26/IMG_5263.jpeg?format=1000w',
+    interpretationPrompts: [
+      "A person's mask is on upside down, so the top half of their face is visible.",
+      "The voice is coming from the eye holes of the mask.",
+      "There are seven simple birds in the background.",
+      "The person is holding onto their utility belt.",
+      "The person in the image appears more human than superhuman."
+    ]
+  },
+  {
+    id: 2,
+    name: 'Dog Headed Spider Alien',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/1b0d96f6-ab13-4fc8-b80d-53e469ba2929/IMG_5262.jpeg?format=1000w',
+    interpretationPrompts: [
+      "A human figure is depicted only in outline.",
+      "A dark ray of light is coming from the alien's eye.",
+      "There are no written words on the card.",
+      "The nature of the interaction is ambiguous.",
+      "The alien's eye resembles a friendly dog."
+    ]
+  },
+  {
+    id: 3,
+    name: 'The Last Few Little Scrapes From The Custard Dish Of Time',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/a84e68b7-f515-45b5-a9a6-de215cc7bee4/IMG_5258.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A grey-haired woman and a white-haired man are clinging on to the outside of a large bowl.",
+        "There are four scrapes of custard remaining in the bowl.",
+        "The woman is wearing red underwear; the man is wearing blue underwear.",
+        "There is no spoon in the image.",
+        "The man is wearing one navy sock and one yellow sock."
+    ]
+  },
+  {
+    id: 4,
+    name: 'The Whispering Teapot Of Far Gotten Dreams',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/c9611c72-7e84-4dd2-96ce-749d1572ceb8/IMG_5257.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The teapot is rusty and battered.",
+        "The teapot has legs and is standing on a pile of assorted napkins.",
+        "Steam from the spout contains a half-built sandcastle and a guitar.",
+        "The steam also contains a torn map with a red X.",
+        "An eye is peeking from behind purple curtains in the steam."
+    ]
+  },
+  {
+    id: 5,
+    name: 'Portrait of A Goose Who Wears A Tie Made Out Of Gold',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/b4d3c572-549b-48b7-a9d3-117711f3cc39/IMG_5256.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The goose in the portrait is wearing a red hat.",
+        "The goose's golden tie is glowing.",
+        "The goose is concealing a dagger or sword behind its back.",
+        "The portrait is resting on an easel.",
+        "The portrait of the goose itself appears to be speaking."
+    ]
+  },
+  {
+    id: 6,
+    name: 'An Ice Cold Woman With An Autumn Flavoured Fish Eye Washes the Mountain From Under Her Nails',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/d6c171d8-8364-45b9-ac30-2eba29754184/IMG_5252.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The woman in the image has purple hair.",
+        "The color palette of the image is autumnal.",
+        "The woman is looking down at her own hand.",
+        "The woman's body is facing away, into the background of the card.",
+        "Rectangles have been added to the speech bubble to make space for the words."
+    ]
+  },
+  {
+    id: 7,
+    name: 'The Hugged Hippo Leaves His Interests On Show',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/c4af4978-1b13-432d-b7c0-1adf09e9cdb2/IMG_5251.jpeg?format=1000w',
+    interpretationPrompts: [
+        "Two people are sitting on a hippo.",
+        "The people are hugging the hippo.",
+        "There are also multiple disembodied arms hugging the hippo.",
+        "The hippo's eyes are filled with scribbles.",
+        "The two riders have kind expressions on their faces."
+    ]
+  },
+  {
+    id: 8,
+    name: 'The Moment You Most Dread May Yet Be The Best Beginning',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/cbd4dde7-eb6d-47b0-85a9-b3e81a8ccd1f/IMG_5249.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The image is primarily composed of the words of the title.",
+        "A faint, outlined figure is arched around the word 'moment'.",
+        "The figure's pose suggests they could be dancing or stretching.",
+        "A small crown is depicted on the ground.",
+        "The letters of the word 'yet' are colored blue, green, and pink."
+    ]
+  },
+  {
+    id: 9,
+    name: 'Give Me Back My Face',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/244e137e-5a5f-491b-a7d3-51afc0d95bc1/IMG_5248.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A woman with long brown hair has no facial features.",
+        "The faceless woman stands above a castle with four turrets and five windows.",
+        "The woman's facial features are visible, but faint and transparent, within the castle walls.",
+        "The castle gate is closed."
+    ]
+  },
+  {
+    id: 10,
+    name: 'The Four of Headless Hedgehogs',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/75eaf307-b714-4617-a6e0-bf89097ad5ee/IMG_5247.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The card is designed in the style of a traditional playing card.",
+        "The four hedgehogs are drawn in a simple style.",
+        "Only one of the four hedgehogs is colored in.",
+        "One of the hedgehogs has wings.",
+        "The hedgehogs have legs that resemble human legs."
+    ]
+  },
+  {
+    id: 11,
+    name: 'What Point In The Wearing Of A Mask That Does Not Fit?',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/e4d994b1-36c3-47ae-a619-baa5caea5cc1/IMG_5246.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A man with blonde hair and green eyes is wearing a small mask.",
+        "The mask covers the lower half of the man's face, from nose to chin.",
+        "The words 'does not fit' are coming from the mask's mouth.",
+        "A faint man and woman are sitting on top of the mask.",
+        "The mask is made of colorful, interlocking shapes.",
+        "The mask has a smiling expression and a blue pompadour hairstyle."
+    ]
+  },
+  {
+    id: 12,
+    name: 'Why Honk Not At The Ghost Ship?',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/510cc2bb-0b60-4ec2-bd83-52547fd06fac/IMG_5245.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The ghost ship is a silhouette against a yellow-ochre sky.",
+        "The ship has seven spiky, illuminated windows.",
+        "Four red lines are emanating from the deck of the ship.",
+        "A large, pink fish with an underbite is in the water.",
+        "A one-legged apparition is hovering over the deck of the ship."
+    ]
+  },
+  {
+    id: 13,
+    name: 'The Past Should Not Wreck the Future. I Used To Work For A Piece Of Burnt Toast',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/7dc2e5d2-e67a-45b6-b7a6-0f2ea2c55e7f/IMG_5244.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A character with a human head and a four-legged animal body is speaking.",
+        "The character has a black goatee beard and an oddly determined expression.",
+        "The texture of burnt toast is visible in the top right corner of the card.",
+        "There is both a white speech bubble and a pink speech bubble.",
+        "The words are written in a large font, as if being shouted."
+    ]
+  },
+  {
+    id: 14,
+    name: 'I Punched Reality So Hard That A Tree Grew From My Fist',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/112120ff-a4f0-4c24-97fa-8afd9a6809f8/IMG_5243.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The man in the image has a tree stump for a nose.",
+        "The man is wearing a pink cardigan with a purple circle pattern.",
+        "There is energy blasting from the man's knuckles.",
+        "The tree growing from the man's fist is lush and fully grown.",
+        "The man has red hair.",
+        "The man's speech bubbles look like steam."
+    ]
+  },
+  {
+    id: 15,
+    name: 'Your Words Worn Written On A Hat On Your Head',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/f88f4b95-b737-4b1a-98d8-1d8e1ec27673/IMG_5242.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A man with white hair and a lantern jaw is wearing a barrel.",
+        "The man's arms are poking through two holes in the front of the barrel.",
+        "The man's speech bubble forms the shape of a hat on his head.",
+        "A yellow creature, resembling a dog or seal, is also in the barrel and appears to be laughing.",
+        "The man's green eyes seem to emanate light.",
+        "There are several colored orbs floating in front of the man."
+    ]
+  },
+  {
+    id: 16,
+    name: 'I Love Your Blood. I Love Your Skeleton',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/66116247-a31a-4992-ae90-25c19f3aaf29/IMG_5241.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The word 'blood' is written in multiple colors.",
+        "There is a scribbled-out mistake in the speech bubble.",
+        "The woman is drawn with energetic spikes and scribbles.",
+        "Two small figures on the woman's chin are connected by a red line between their eyes.",
+        "A small golden book is rising up the woman's sleeve.",
+        "The woman has a luminous golden flower in her hand.",
+        "A faint, transparent tree is in the bottom right corner."
+    ]
+  },
+  {
+    id: 17,
+    name: 'Show Me How To Be Fearless And Accept Myself',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/ec124243-c311-425e-989e-f25e119e861a/IMG_5240.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The woman in the image has sharp, beige-colored teeth.",
+        "There is a flower reflected in the woman's left eye and a candle in her right.",
+        "There are white marks on the woman's cheeks, which could be sweat or tears.",
+        "A hard-to-see, four-legged person appears to be screaming in the woman's hair.",
+        "The woman has a long, red nose."
+    ]
+  },
+  {
+    id: 18,
+    name: 'Bless All Those That Fall From The Bridge Between Mine Ears',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/735dda44-ec76-48ef-b857-86d2ec0bc72f/IMG_5239.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The main figure is a rabbit-like creature with extremely long ears.",
+        "A rope bridge connects the tips of the creature's two ears.",
+        "A person wearing only blue underpants is falling from the bridge.",
+        "The creature's skin is a blotchy grey, with an ambiguous texture that could be fur or stone.",
+        "The inside of the creature's mouth, its gums and tongue, are also grey."
+    ]
+  },
+  {
+    id: 19,
+    name: 'A Naked Man With A Luscious Mullet Sings You The Song Of Your Dreams',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/1d49ef73-e0d0-4051-99ad-3d7fc9c94794/IMG_5238.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The man in the picture has a blonde mullet hairstyle and a suntan.",
+        "The man has piercing blue eyes.",
+        "The man is naked.",
+        "The man's hair appears to be recently brushed.",
+        "The words on the card are written in pink inside a grey speech bubble."
+    ]
+  },
+  {
+    id: 20,
+    name: 'Sweet, Come And Prickle Yourself Against My Misery. The Boundaried Goose Has Wisdom To Spare',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/f24c4b4f-3468-4995-afe5-db5a8f6b1a05/IMG_5237.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The man in the picture resembles a large baby with a bird's beak.",
+        "The man is wearing turquoise briefs with a yellow waistband.",
+        "A woman has a dark, spiky shape emanating from her upper body.",
+        "There are shapes resembling castle turrets between the two figures.",
+        "The man is saying the word 'no'.",
+        "The man is wearing a single pink running boot.",
+        "The phrase 'The boundaried goose has wisdom to spare' is written on the man's leg.",
+        "The background of the card is red."
+    ]
+  },
+  {
+    id: 21,
+    name: 'The Power To Generate Emptiness',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/289bf169-4e3c-4f3d-898d-da92d80aa20c/IMG_5236.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A teapot with legs is pouring nothing into three cups.",
+        "A broken teapot spout lies on the ground.",
+        "Emptiness is pouring from the teapot's spout and also from its two feet.",
+        "The teapot is lilac with a purple handle and lid.",
+        "The scene is set on a red, orange, and purple beach towel.",
+        "The teapot's legs are wearing pastel-green trousers and pastel-yellow shoes."
+    ]
+  },
+  {
+    id: 22,
+    name: 'Loom In Essence',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/4f65c90d-f7e8-48cd-afa2-243eb6e57ec8/IMG_5235.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The card is purple with a figure drawn in black outline.",
+        "The figure is composed of a large head with two legs directly underneath.",
+        "The perspective is ambiguous; it could be a figure with a large head, or a bird's-eye view of someone looking up.",
+        "The figure has a confused or surprised expression.",
+        "There are wrinkle lines on the figure's face and trousers."
+    ]
+  },
+  {
+    id: 23,
+    name: 'The Flame Of Hope Burns Those That Doubt Her',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/3e8f1c4b-b186-4924-8199-60e340acc957/IMG_5234.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A person is holding a flame in the palm of their hand.",
+        "The flame has orange eyes and eyebrows.",
+        "The flame has a mouth made of fire, from which a speech bubble emerges.",
+        "A disembodied arm is to the left of the flame with its hand up.",
+        "The disembodied arm is saying 'unreasonable' and 'why?'.",
+        "The person holding the flame is dressed in green, white, and orange."
+    ]
+  },
+  {
+    id: 24,
+    name: 'I Do Not Wish You Ever Be Imaginary',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/5fdf45e7-71e7-4cee-9f92-fc5c2d20b9dd/IMG_5233.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A figure with a beak-like mouth points at the words 'I do not wish you ever be imaginary'.",
+        "The words are in a speech bubble, but there is no one visibly speaking them.",
+        "The pointing figure is addressing a smaller figure, who could be a child or pupil.",
+        "A scribbled, finless fish with a yellow eye is near the speech bubble.",
+        "An almost invisible character in the bottom left corner is reaching out to touch the fish."
+    ]
+  },
+  {
+    id: 25,
+    name: 'Please Do Not Shield My Petals From The Snow',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/4c1ed2a9-3c34-45f7-b2dc-0fd5fa1f4386/IMG_5232.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A large flower is bending over to shield a smaller flower from falling snow.",
+        "A single snowflake is speaking the words in the speech bubble.",
+        "Both flowers have surprised expressions.",
+        "The smaller flower has petals styled like an orange and white mohican.",
+        "The snowfall is heavy, covering the hills in the background."
+    ]
+  },
+  {
+    id: 26,
+    name: 'Spider',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/6dcac9e2-db00-48d7-887e-6f119f76a92b/IMG_5231.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A woman with five legs, no arms, and pink lips walks by a lake.",
+        "The woman has a green glass bottle on her torso.",
+        "The lake has blue water and two tall brown trees on its shore.",
+        "A transparent, deflated balloon shape with a drawing of a spider is in the top right.",
+        "A faint line connects the spider image to one of the woman's five legs."
+    ]
+  },
+  {
+    id: 27,
+    name: 'Con-Template',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/a0a55eb4-c474-4948-a8e6-b6bee978480f/IMG_5230.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A head has five hands reaching out from its skull.",
+        "One hand reaches towards a small yellow car.",
+        "Another hand reaches towards a small, floating tree.",
+        "One hand is holding a flower with yellow petals.",
+        "A semi-transparent, four-legged man stands in front of the face, saying 'Con-Template'."
+    ]
+  },
+  {
+    id: 28,
+    name: 'Are You Really Tied Up Or Just Pressing Your Hands Together?',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/0ba72af3-16a9-447f-b2b0-02551ebcaad4/IMG_5229.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A figure is seen from behind and appears to be unclothed.",
+        "The figure may be wearing a mask.",
+        "The figure has a very large, multi-colored (pink, blue, green) ear.",
+        "The figure's wrists are pressed together, but it is unclear if they are tied.",
+        "The speech bubble containing the question is in the shape of a penguin."
+    ]
+  },
+  {
+    id: 29,
+    name: 'Black Flames Ooze From The House Without Windows',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/986e8303-6f67-4d88-8a67-043d57369381/IMG_5227.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The house has a red door, a blue roof, white walls, and no windows.",
+        "The sky is orange with a large circle that could be the sun or moon.",
+        "Black, jagged lines outline the house and emanate from its roof.",
+        "This was the first card created in a new deck.",
+        "Three black swirls are faintly visible through the roof of the house."
+    ]
+  },
+  {
+    id: 30,
+    name: 'A Pause Upon The Battlefield For Questions',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/638965fa-4858-4b5d-81a1-8c7c03d35a7b/IMG_5288.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A large, muscular man with a castle for a head is raising his hand.",
+        "The man is not wearing a top.",
+        "The man is holding a knife with a serrated edge.",
+        "The man is wearing pale green trousers, an orange belt, and pink shoes.",
+        "The entrance to the castle is where the man's mouth would be."
+    ]
+  },
+  {
+    id: 31,
+    name: 'The Last Act Of Rebellion Is Kindness',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/987b2bd3-620c-46f5-949c-2ba1a4c903a6/IMG_5286.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A large figure is composed of two halves, one black and one white.",
+        "A soldier in the foreground has his boot propped on an army tank.",
+        "A flower is growing from the tank's missile launcher.",
+        "The flower is growing towards the black half of the large figure.",
+        "The title sentence is split into four separate speech bubbles.",
+        "The soldier's speech bubble is in the shape of a green face with ginger hair."
+    ]
+  },
+  {
+    id: 32,
+    name: 'The ReSorceress',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/c0044d8c-476e-45e3-87b0-114b1e88de88/IMG_5285.jpeg?format=1000w',
+    interpretationPrompts: [
+        "This is one of two cards in the deck that has no words on it.",
+        "A woman in a dark navy-grey dress is frozen mid-leap inside a block of ice.",
+        "A shape with magical colors is coming from the woman's mouth.",
+        "The shape could be breath or it could be flame.",
+        "The woman's expression does not seem perturbed by her situation."
+    ]
+  },
+  {
+    id: 33,
+    name: 'Cat Path',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/85966f08-d29a-45b0-8fd3-d0474f1ed9f5/IMG_5226.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A green chair has four human feet instead of legs.",
+        "The chair's cushion is a car, and the car's bonnet is a laptop.",
+        "A crown on the chair has the word 'pathway' written on it.",
+        "The laptop screen shows a framed portrait of a cat.",
+        "The word 'amalgamation' is written faintly on the chair.",
+        "The ground is tiled in dark orange and yellow.",
+        "The cat portrait has a yellow house on a hill in its background.",
+        "There is pink patterned wallpaper behind the chair."
+    ]
+  },
+  {
+    id: 34,
+    name: 'You Will Be A Mountain Ear Of Rainbows Hopefully',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/7aec5d02-5db7-4d5f-aeac-8b1d52f97b39/IMG_5259.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A loosely drawn character is climbing a rainbow.",
+        "The character is near the peak of the rainbow.",
+        "The rainbow has an ear with a crystal earring on it.",
+        "There is a scribbled ring shape inside the rainbow.",
+        "The climbing character is wearing sunglasses and has claw-like fingers."
+    ]
+  },
+  {
+    id: 35,
+    name: 'Oh Goodness, No, I\'m Fine. Thanks For Asking',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/06d32014-efcd-4593-a1c4-e38e811f62eb/IMG_5187.jpeg?format=1000w',
+    interpretationPrompts: [
+        "A giant magenta-colored head with a sharp nose has a smaller person's head in its mouth.",
+        "It is unclear which character is speaking the words.",
+        "The person in the giant's mouth is wearing a red jacket, blue jeans, and a white shirt.",
+        "The person appears casual, with their hands in their pockets.",
+        "The giant head has a demonic appearance."
+    ]
+  },
+  {
+    id: 36,
+    name: 'The Goose Meets The Eagle In The Sky For Their Breakfasts',
+    imageSrc: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/155044fa-dbe0-4a67-82bf-2cf44fb93683/IMG_5261.jpeg?format=1000w',
+    interpretationPrompts: [
+        "The image is rendered loosely with a childlike quality.",
+        "The goose and the eagle appear to be friendly.",
+        "White marks emanate from the goose, while brown marks emanate from the eagle.",
+        "Breakfast items (a cereal box, two bowls, a spoon) are on a table below the flying creatures.",
+        "A cross-section of the ground shows a layer of grass above mud with circular patterns."
+    ]
+  }
+]

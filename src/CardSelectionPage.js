@@ -10,7 +10,7 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
   // States for magical effects
   const [isFocused, setIsFocused] = useState(false);
   const [showRipple, setShowRipple] = useState(false);
-  const [isWellTold, setIsWellTold] = useState(false); // New state to track if well has been told
+  const [isWellTold, setIsWellTold] = useState(false); 
 
   useEffect(() => {
     const cardIds = Array.from({ length: CARD_DATA.length }, (_, i) => i + 1);
@@ -36,19 +36,16 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
     });
   };
 
-  // This function is now simplified to be more robust
   const handleTellTheWell = () => {
       if (userQuery.trim()) {
-          setIsWellTold(true); // Disable the button after clicking
+          setIsWellTold(true); 
           setEchoMessage('Your words echo back in a voice that is not your own.');
-          setShowRipple(true); // Trigger the ripple effect
+          setShowRipple(true); 
 
-          // Hide the echo message after a few seconds
           setTimeout(() => {
               setEchoMessage('');
           }, 4000);
 
-          // Reset the ripple effect class
           setTimeout(() => {
             setShowRipple(false);
           }, 1000);
@@ -69,8 +66,10 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
     <div className={`page-container card-selection-page ${isFadingOut ? 'dissolving-out' : ''}`}>
       <header>
         <h1>Gerry's Well of Wisdom</h1>
-        <p className="well-text">Ah... you have arrived at Gerry's Well of Wisdom. Enjoy the gentle sway of the golden waters as you gaze into its depths.</p>
-        <p className="well-text">You may share with the well a topic or question that you would like to explore through your reading. Or you can choose your cards in contemplative silence and trust that Archangel Gerry and Gemini will intuit what you most need to know.</p>
+        {/* This is the updated text */}
+        <p className="well-text">
+            Ah... Seeker... you have arrived at the Well of Wisdom. You may drop in a question, concern or topic for your reading or choose from the cards below in contemplative silence. The more you tell the well, the more personal your reading will be. Rest assured, your words, once heard, will vanish forever into the glowing golden waters.
+        </p>
       </header>
       <main>
         <div className={`well-container ${showRipple ? 'ripple-effect' : ''}`}>
@@ -84,11 +83,6 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
             ></video>
         </div>
         
-        <p className="well-text">
-            Feel free to approach the well with any manner of inquiry. It can be serious or silly, terribly pressing or about trouser pressing. The more information that you tell the well, the more personalised your reading will be.
-        </p>
-        <p className="well-text italic">Rest assured, your words are whispered only to the well. They are heard once for your reading, then vanish into the mists.</p>
-        
         <div className={`query-box ${isFocused ? 'focused' : ''}`}>
           <textarea
             value={userQuery}
@@ -97,7 +91,7 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
             onBlur={() => setIsFocused(false)}
             rows="6"
             placeholder="Type your question or topic here..."
-            readOnly={isWellTold} // Make textarea readonly after sending
+            readOnly={isWellTold} 
           />
           <button onClick={handleTellTheWell} disabled={isWellTold}>
             {isWellTold ? 'The Well is Listening...' : 'Tell The Well'}

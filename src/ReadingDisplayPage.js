@@ -5,7 +5,7 @@ const Loader = () => <div className="loader"></div>;
 
 function ReadingDisplayPage({ userQuery, selectedCards, cardData, setPage }) {
     const [interpretation, setInterpretation] = useState('');
-    const [memento, setMemento] = useState(''); // New state for the memento summary
+    const [memento, setMemento] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [enlargedCard, setEnlargedCard] = useState(null);
 
@@ -20,29 +20,36 @@ function ReadingDisplayPage({ userQuery, selectedCards, cardData, setPage }) {
         setInterpretation('');
         setMemento('');
 
-        // --- New, Simplified Prompt Generation Logic ---
+        // --- THIS IS THE NEW LOGIC ---
 
-        const cardDetails = readingCards.map(card => `* ${card.name}: which represents '${card.interpretationPrompt}'`).join('\n');
+        // For each card, select one random descriptive prompt
+        const cardDetails = readingCards.map(card => {
+            const randomIndex = Math.floor(Math.random() * card.interpretationPrompts.length);
+            const randomPrompt = card.interpretationPrompts[randomIndex];
+            return `* ${card.name}: A key detail is '${randomPrompt}'`;
+        }).join('\n');
         
         let prompt = `
-Imagine you had to use these cards to create a really useful piece of life advice for someone who needs it. Create a 500-word text as if you, Gemini, had consulted with a great, kind, wise, and lighthearted sage named Archangel Gerry, who lives in the golden waters of his well of wisdom.
+Imagine you had to use these cards to create a really useful piece of life advice for someone who needs it. Create a 500-word text as if you, Gemini, had consulted with a great, kind, wise, and lighthearted sage named Archangel Gerry.
 
 The reading should be a summary of your consultation. It can be a dialogue or a unified voice. The tone must be insightful, empathetic, caring, and genuinely useful. Avoid simple platitudes.
 
-The seeker has drawn these four cards:
+The seeker has drawn four cards, and for each, a key visual detail has been noted. Please make connections between these specific elements from the different cards to form your reading.
+
+The cards and their key details are:
 ${cardDetails}
         `;
 
         if (userQuery) {
-            prompt += `\nThey have specifically asked for guidance on: "${userQuery}". Please try to address that question in a helpful and empathic way, using the cards as your guide.`;
+            prompt += `\nThey have specifically asked for guidance on: "${userQuery}". Please address that question in a helpful and empathic way, using the card details as your guide.`;
         } else {
-            prompt += `\nThey have not asked a question, so please use the cards as your sole guide to provide the wisdom they most need to hear.`;
+            prompt += `\nThey have not asked a question, so please use the card details as your sole guide to provide the wisdom they most need to hear.`;
         }
 
         prompt += `\n\nAfter the main reading, on a new line, provide a single, unique sentence that encapsulates the core wisdom of this specific reading. Start this line with "Memento:".`;
 
         try {
-            const apiUrl = 'http://localhost:5001/get-reading'; // Point to the backend
+            const apiUrl = 'http://localhost:5001/get-reading';
             
             const response = await fetch(apiUrl, {
                 method: 'POST',
@@ -116,7 +123,7 @@ ${cardDetails}
                             className={`reading-card ${enlargedCard === card.id ? 'enlarged' : ''}`}
                             onClick={() => handleCardClick(card.id)}
                         >
-                            <img src={card.imageSrc} alt={card.alt} />
+                            <img src={card.imageSrc} alt={card.name} />
                         </div>
                     ))}
                 </div>
