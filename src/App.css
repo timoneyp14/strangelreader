@@ -1,3 +1,77 @@
+/* =================================== */
+/* Mobile & Tablet Styles      */
+/* =================================== */
+@media (max-width: 768px) {
+
+  /* --- Styles for the Header --- */
+  .app-header {
+    flex-direction: column !important;
+    padding-top: 20px !important;
+    padding-bottom: 10px !important;
+  }
+  .app-header .main-title {
+    margin-bottom: 15px !important;
+  }
+  .app-header nav {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .app-header nav a {
+    margin-left: 0 !important;
+    margin-bottom: 15px !important;
+    font-size: 1.1rem !important;
+  }
+
+  /* --- Styles for Page Content --- */
+  .page-container {
+    padding: 20px !important; 
+  }
+  .well-text {
+    font-size: 1.1rem !important;
+    line-height: 1.5 !important;
+  }
+  .query-box {
+    width: auto !important;
+    max-width: 100% !important; 
+  }
+
+  /* --- Styles for Card Selection Grid --- */
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 15px !important;
+  }
+
+  /* --- Styles for the Reading Cards Grid --- */
+  .reading-cards-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* --- Styles for Reading Page Buttons --- */
+  .post-reading-options {
+    display: flex !important;
+    flex-direction: column !important; 
+    align-items: center !important;   
+    gap: 1rem !important;             
+  }
+  .ask-gerry-button, 
+  .new-reading-button, 
+  .memento-button, 
+  .journey-button {
+    width: 90% !important; 
+    max-width: 350px !important; 
+    padding: 1rem !important; 
+    font-size: 1rem !important; 
+    margin-left: auto !important; 
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+  }
+}
+
+
+/* =================================== */
+/* Original Desktop Styles     */
+/* =================================== */
 html, body, #root {
     height: 100%;
 }
