@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SubscribeForm from './SubscribeForm'; // Import the new form component
 
 function HomePage({ setPage }) {
   const [isFadingOut, setIsFadingOut] = useState(false);
@@ -38,11 +39,8 @@ function HomePage({ setPage }) {
             <p>
                 Subscribe to Archangel Gerry's monthly email for exclusive wisdom, guidance, and updates from the Strangel world.
             </p>
-            <form className="subscription-form">
-                <input type="email" id="email-subscribe" name="email-subscribe"
-                       placeholder="your@email.com" required />
-                <button type="submit">Subscribe</button>
-            </form>
+            {/* --- This is the new, working form component --- */}
+            <SubscribeForm />
         </div>
       </main>
     </div>

@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import HomePage from './HomePage';
 import CardSelectionPage from './CardSelectionPage';
 import ReadingDisplayPage from './ReadingDisplayPage';
 import ProgressToHeavenPage from './ProgressToHeavenPage';
-import AdminPage from './AdminPage'; 
 import './ProgressToHeavenPage.css';
-import './AdminPage.css'; 
 import { CARD_DATA } from './cardData';
 
 // --- Placeholder Pages ---
@@ -31,52 +29,16 @@ const Header = ({ setPage, page }) => {
                 <a href="#home" onClick={() => setPage('home')} className={page === 'home' ? 'nav-active' : ''}>Home</a>
                 <a href="#about" onClick={() => setPage('about-gerry')} className={page === 'about-gerry' ? 'nav-active' : ''}>About Gerry</a>
                 <a href="#progress" onClick={() => setPage('progress-to-heaven')} className={page === 'progress-to-heaven' ? 'nav-active' : ''}>Progress to Heaven</a>
-                {/* The public link to the Admin page has been removed */}
             </nav>
         </header>
     );
 };
 
-// --- Footer Component (with secret admin access) ---
-const Footer = ({ setPage }) => {
-    const [clickCount, setClickCount] = useState(0);
-    const clickTimeout = useRef(null);
-
-    const handleFooterClick = () => {
-        // Clear the previous timeout to reset the timer
-        if (clickTimeout.current) {
-            clearTimeout(clickTimeout.current);
-        }
-
-        const newClickCount = clickCount + 1;
-        setClickCount(newClickCount);
-
-        if (newClickCount >= 5) {
-            setPage('admin'); // Navigate to the admin page
-            setClickCount(0); // Reset the counter
-        } else {
-            // Set a timer to reset the count if the user stops clicking
-            clickTimeout.current = setTimeout(() => {
-                setClickCount(0);
-            }, 2000); // 2-second window to complete the 5 clicks
-        }
-    };
-    
-    // Cleanup the timeout when the component unmounts
-    useEffect(() => {
-        return () => {
-            if (clickTimeout.current) {
-                clearTimeout(clickTimeout.current);
-            }
-        };
-    }, []);
-
-
+// --- Footer Component ---
+const Footer = () => {
     return (
         <footer className="app-footer">
-            <p onClick={handleFooterClick} style={{ cursor: 'pointer' }}>
-                © 2025 Strangel Readings. All rights reserved.
-            </p>
+            <p>© 2025 Strangel Readings. All rights reserved.</p>
         </footer>
     );
 };
@@ -115,8 +77,6 @@ function App() {
         return <AboutGerryPage />;
       case 'progress-to-heaven':
         return <ProgressToHeavenPage />;
-      case 'admin':
-        return <AdminPage />;
       case 'home':
       default:
         return <HomePage
@@ -131,8 +91,7 @@ function App() {
         <main className="app-content">
             {renderPage()}
         </main>
-        {/* Pass the setPage function to the Footer */}
-        <Footer setPage={setPage} />
+        <Footer />
     </div>
   );
 }

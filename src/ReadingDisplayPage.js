@@ -49,7 +49,7 @@ ${cardDetails}
         prompt += `\n\nAfter the main reading, on a new line, provide a single, unique sentence that encapsulates the core wisdom of this specific reading. Start this line with "Memento:".`;
 
         try {
-            const apiUrl = 'http://localhost:5001/get-reading';
+            const apiUrl = 'https://us-central1-strangel-readings.cloudfunctions.net/api/get-reading';
             
             const response = await fetch(apiUrl, {
                 method: 'POST',

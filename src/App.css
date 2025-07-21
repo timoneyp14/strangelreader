@@ -146,9 +146,13 @@ body {
   text-align: center;
 }
 .page-container header {
-  margin-bottom: 0; /* This is the updated part */
+  margin-bottom: 0; 
   border-bottom: 1px solid #eee;
   padding-bottom: 1rem;
+}
+
+.page-container header + .intro-text {
+  margin-top: 0;
 }
 
 .page-container h1 {
@@ -169,7 +173,7 @@ body {
     line-height: 1.6;
 }
 .intro-text.first-intro {
-    margin-top: 1.5rem; /* Adjusted to create consistent spacing */
+    margin-top: 1.5rem;
 }
 
 /* --- About Gerry Page Specific Styles --- */
@@ -214,11 +218,15 @@ body {
 .subscription-box h3 {
     margin-bottom: 1rem;
     color: #4a148c;
+    /* NEW: Make heading bigger and move closer to the top */
+    font-size: 1.75rem;
+    margin-top: 0;
 }
 .subscription-box p {
     color: #581c87;
     margin-bottom: 1.5rem;
-    font-size: 1rem;
+    /* NEW: Make paragraph text bigger */
+    font-size: 1.1rem;
 }
 .subscription-form {
     display: flex;
@@ -230,11 +238,16 @@ body {
     padding: 0.75rem;
     border: 1px solid #a78bfa;
     border-radius: 0.375rem;
+    /* NEW: Apply the site's main font */
+    font-family: inherit;
 }
 .subscription-form button {
     background-color: #581c87;
     color: #e9d5ff;
+    /* NEW: Apply the site's main font and make button bigger */
     font-family: inherit;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
 }
 .subscription-form button:hover {
     background-color: #4a148c;
@@ -464,7 +477,7 @@ body {
     border-radius: 0.375rem;
     font-size: 1.25rem;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: 4rem; /* Increased margin-bottom */
+    margin-bottom: 4rem; 
     font-family: inherit;
 }
 .ask-gerry-button:hover {
@@ -514,6 +527,7 @@ body {
 }
 .new-reading-button {
     margin-top: 2.5rem;
+    margin-left: 1rem; 
     background-color: #6b7280;
     color: white;
     font-weight: bold;
