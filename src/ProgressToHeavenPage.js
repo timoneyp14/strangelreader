@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, signInWithCustomToken } from 'firebase/auth';
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore';
+// Use the central Firebase config, just like the rest of the app
+import { auth, db, appId } from './firebase'; 
+import { signInAnonymously } from 'firebase/auth';
+import { collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore';
 
 // --- Component Definition ---
 function ProgressToHeavenPage() {
@@ -9,13 +10,12 @@ function ProgressToHeavenPage() {
     const [orbs, setOrbs] = useState([]);
     const [orbName, setOrbName] = useState('');
     const [orbColor, setOrbColor] = useState('#fde047');
+    // This state now reads from sessionStorage to remember if an orb was given
     const [hasAwardedOrb, setHasAwardedOrb] = useState(sessionStorage.getItem('hasAwardedOrb') === 'true');
-    const [db, setDb] = useState(null);
     const [userId, setUserId] = useState(null);
-    const [appId, setAppId] = useState('default-app-id');
     const scrollerRef = useRef(null);
 
-    // --- Data for Realms (CORRECTED TRIGGER VALUES) ---
+    // --- Data for Realms ---
     const REALMS = [
         { name: 'The Earthly Sky', trigger: 0, url: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/e1efda68-76e6-4f2a-941c-e6904c821d42/realm-earth.jpg?format=1500w' },
         { name: 'The Realm Of Flying Friends', trigger: 200, url: 'https://images.squarespace-cdn.com/content/v1/63c124b461cb3504b7ab4e26/4ed640ce-fbfd-471b-9d41-8806d12f8fe4/IMG_5302.jpeg?format=1500w' },
@@ -26,75 +26,45 @@ function ProgressToHeavenPage() {
     ];
     const REALM_HEIGHT = 2400;
 
-    // --- Firebase Initialization and Data Fetching Effect ---
+    // --- Simplified Firebase Data Fetching Effect ---
     useEffect(() => {
-        let firebaseConfig = {};
-        let finalAppId = 'default-app-id';
-        let finalToken = null;
-
-        if (process.env.REACT_APP_API_KEY) {
-            firebaseConfig = {
-                apiKey: process.env.REACT_APP_API_KEY,
-                authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-                projectId: process.env.REACT_APP_PROJECT_ID,
-                storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-                messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-                appId: process.env.REACT_APP_FIREBASE_APP_ID
-            };
-            finalAppId = process.env.REACT_APP_FIREBASE_APP_ID;
-        } 
-        else if (typeof window !== 'undefined' && window.__firebase_config) {
+        const authenticateAndFetch = async () => {
             try {
-                firebaseConfig = JSON.parse(window.__firebase_config);
-                finalAppId = window.__app_id || 'default-app-id';
-                finalToken = window.__initial_auth_token || null;
-            } catch (e) {
-                console.error("Failed to parse window.__firebase_config", e);
-                return;
-            }
-        }
-
-        setAppId(finalAppId);
-
-        if (firebaseConfig.apiKey) {
-            const app = initializeApp(firebaseConfig);
-            const firestore = getFirestore(app);
-            const auth = getAuth(app);
-            setDb(firestore);
-
-            const authenticate = async () => {
-                try {
-                    if (finalToken) {
-                        await signInWithCustomToken(auth, finalToken);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                    setUserId(auth.currentUser?.uid || crypto.randomUUID());
-                } catch (authError) {
-                    console.error("Authentication failed:", authError);
+                // Ensure user is signed in
+                if (!auth.currentUser) {
+                    await signInAnonymously(auth);
                 }
-            };
+                setUserId(auth.currentUser.uid);
 
-            authenticate().then(() => {
-                 const orbsCollectionRef = collection(firestore, `artifacts/${finalAppId}/public/data/orbs`);
-                 const q = query(orbsCollectionRef, orderBy("timestamp", "asc"));
+                // Set up the listener for orbs
+                const orbsCollectionRef = collection(db, `artifacts/${appId}/public/data/orbs`);
+                const q = query(orbsCollectionRef, orderBy("timestamp", "asc"));
 
-                 const unsubscribe = onSnapshot(q, (querySnapshot) => {
-                     const orbsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                     setOrbs(orbsData);
-                     if (scrollerRef.current) {
-                         scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
-                     }
-                 }, (error) => {
-                     console.error("Firebase onSnapshot error: ", error);
-                 });
+                const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                    const orbsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    setOrbs(orbsData);
+                    // Auto-scroll to the latest orb
+                    if (scrollerRef.current) {
+                        scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
+                    }
+                }, (error) => {
+                    console.error("Firebase onSnapshot error: ", error);
+                });
 
-                 return () => unsubscribe();
+                return unsubscribe; // Return the function to stop listening when the page is closed
+            } catch (authError) {
+                console.error("Authentication failed:", authError);
+            }
+        };
+
+        const unsubscribePromise = authenticateAndFetch();
+
+        return () => {
+            unsubscribePromise.then(unsubscribe => {
+                if (unsubscribe) unsubscribe();
             });
-        } else {
-            console.error("Firebase configuration is missing. Orb feature will not work.");
-        }
-    }, []);
+        };
+    }, [appId]); // Rerun if appId changes
 
     const handleOrbSubmit = async (e) => {
         e.preventDefault();
@@ -111,6 +81,7 @@ function ProgressToHeavenPage() {
                 timestamp: new Date(),
                 userId
             });
+            // This line saves the fact that the user has given an orb
             sessionStorage.setItem('hasAwardedOrb', 'true');
             setHasAwardedOrb(true);
             setOrbName('');
@@ -120,6 +91,7 @@ function ProgressToHeavenPage() {
         }
     };
 
+    // --- Calculation logic (no changes needed here) ---
     const stepHeight = 80;
     const pathHeight = (orbs.length * stepHeight) + 300;
     let totalHeight = pathHeight;
@@ -203,6 +175,7 @@ function ProgressToHeavenPage() {
                 <div className="orb-counter-container">
                     Total Orbs on Gerry's Path: <span className="orb-count">{orbs.length}</span>
                 </div>
+                {/* This is the new logic: show the form OR the thank you message */}
                 {hasAwardedOrb ? (
                     <div className="orb-awarded-message">
                         <h3>Gerry Thanks You For Your Orb</h3>

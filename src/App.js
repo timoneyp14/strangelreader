@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
+// Import all the separate page components
 import HomePage from "./HomePage";
 import CardSelectionPage from "./CardSelectionPage";
 import ReadingDisplayPage from "./ReadingDisplayPage";
 import ProgressToHeavenPage from "./ProgressToHeavenPage";
-import AboutGerryPage from "./AboutGerryPage"; // optional: separate if you extract it
+import AboutGerryPage from "./AboutGerryPage"; 
 import { CARD_DATA } from "./cardData";
+
+// --- THIS IS THE MISSING LINE ---
+import './ProgressToHeavenPage.css';
 
 // --- Header ---
 const Header = ({ setPage, page }) => (
