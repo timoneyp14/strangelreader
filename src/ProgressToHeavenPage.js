@@ -10,7 +10,6 @@ function ProgressToHeavenPage() {
     const [orbs, setOrbs] = useState([]);
     const [orbName, setOrbName] = useState('');
     const [orbColor, setOrbColor] = useState('#fde047');
-    // This state now reads from sessionStorage to remember if an orb was given
     const [hasAwardedOrb, setHasAwardedOrb] = useState(sessionStorage.getItem('hasAwardedOrb') === 'true');
     const [userId, setUserId] = useState(null);
     const scrollerRef = useRef(null);
@@ -26,7 +25,7 @@ function ProgressToHeavenPage() {
     ];
     const REALM_HEIGHT = 2400;
 
-    // --- Simplified Firebase Data Fetching Effect ---
+    // --- Firebase Data Fetching Effect ---
     useEffect(() => {
         const authenticateAndFetch = async () => {
             try {
@@ -68,8 +67,8 @@ function ProgressToHeavenPage() {
 
     const handleOrbSubmit = async (e) => {
         e.preventDefault();
-        if (!db) {
-            alert("Database not connected. Cannot save orb.");
+        if (!db || !userId) {
+            alert("Connection not ready. Please try again in a moment.");
             return;
         }
         const name = orbName.trim() || "An unnamed light";
@@ -79,12 +78,17 @@ function ProgressToHeavenPage() {
                 name,
                 color: orbColor,
                 timestamp: new Date(),
-                userId
+                userId 
             });
-            // This line saves the fact that the user has given an orb
+            
             sessionStorage.setItem('hasAwardedOrb', 'true');
             setHasAwardedOrb(true);
             setOrbName('');
+
+            // --- THIS IS THE TEST LINE ---
+            // If you see this alert, it means the orb was saved successfully.
+            alert("Orb saved successfully! The page should now update.");
+
         } catch (error) {
             console.error("Error saving orb:", error);
             alert("Failed to add orb. Please try again.");
@@ -175,7 +179,7 @@ function ProgressToHeavenPage() {
                 <div className="orb-counter-container">
                     Total Orbs on Gerry's Path: <span className="orb-count">{orbs.length}</span>
                 </div>
-                {/* This is the new logic: show the form OR the thank you message */}
+                {/* This now uses the correct sessionStorage logic to decide what to show */}
                 {hasAwardedOrb ? (
                     <div className="orb-awarded-message">
                         <h3>Gerry Thanks You For Your Orb</h3>
