@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import MementoPage from './MementoPage'; // Import our new component
 
 // A simple loader component
 const Loader = () => <div className="loader"></div>;
@@ -7,13 +8,10 @@ function ReadingDisplayPage({ userQuery, selectedCards, cardData, setPage }) {
     const [interpretation, setInterpretation] = useState('');
     const [memento, setMemento] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [enlargedCard, setEnlargedCard] = useState(null);
+    // The 'enlargedCard' state and 'handleCardClick' function have been removed for the new layout.
+    const [showMementoPage, setShowMementoPage] = useState(false); 
 
     const readingCards = cardData.filter(card => selectedCards.includes(card.id));
-
-    const handleCardClick = (cardId) => {
-        setEnlargedCard(enlargedCard === cardId ? null : cardId);
-    };
 
     const getInterpretation = async () => {
         setIsLoading(true);
@@ -72,31 +70,16 @@ ${cardDetails}
             setIsLoading(false);
         }
     };
-
-    const createMemento = () => {
-        if (!memento) return;
-
-        const cardImagesHTML = readingCards.map(card => `
-            <div style="width: 200px; height: 300px; margin: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 1rem; overflow: hidden;">
-                <img src="${card.imageSrc}" alt="${card.name}" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-        `).join('');
-
-        const mementoHTML = `
-            <html><head><title>Your Strangel Reading Memento</title><style>
-            body { font-family: "Georgia", "Times New Roman", serif; background-color: #FEF3C7; text-align: center; padding: 2rem; }
-            h1 { color: #581c87; } .cards-container { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 2rem; }
-            .quote { font-style: italic; font-size: 1.25rem; margin-top: 2rem; color: #581c87; max-width: 600px; margin-left: auto; margin-right: auto; }
-            .print-button { margin-top: 2rem; padding: 0.75rem 1.5rem; font-size: 1rem; color: white; background-color: #7e22ce; border: none; border-radius: 0.5rem; cursor: pointer; }
-            @media print { .print-button { display: none; } }
-            </style></head><body><h1>Your Strangel Reading</h1><div class="cards-container">${cardImagesHTML}</div>
-            <p class="quote">"${memento}"</p><button class="print-button" onclick="window.print()">Print Memento</button></body></html>
-        `;
-
-        const newWindow = window.open("", "_blank");
-        newWindow.document.write(mementoHTML);
-        newWindow.document.close();
-    };
+    
+    if (showMementoPage) {
+        return (
+            <MementoPage 
+                readingCards={readingCards} 
+                mementoText={memento} 
+                onBack={() => setPage('home')} 
+            />
+        );
+    }
 
     return (
         <div className="page-container reading-page-bg">
@@ -106,12 +89,9 @@ ${cardDetails}
             </header>
             <main>
                 <div className="reading-cards-grid">
+                    {/* Simplified card rendering without the enlarge-on-click logic */}
                     {readingCards.map(card => (
-                        <div 
-                            key={card.id} 
-                            className={`reading-card ${enlargedCard === card.id ? 'enlarged' : ''}`}
-                            onClick={() => handleCardClick(card.id)}
-                        >
+                        <div key={card.id} className="reading-card">
                             <img src={card.imageSrc} alt={card.name} />
                         </div>
                     ))}
@@ -131,8 +111,8 @@ ${cardDetails}
                             {interpretation}
                         </div>
                         <div className="post-reading-options">
-                             <button className="memento-button" onClick={createMemento}>
-                                Save a Memento
+                             <button className="memento-button" onClick={() => setShowMementoPage(true)}>
+                                Create Memento
                             </button>
                              <button className="journey-button" onClick={() => setPage('progress-to-heaven')}>
                                 Help Gerry on His Journey
