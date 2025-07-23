@@ -25,24 +25,21 @@ function ProgressToHeavenPage() {
     ];
     const REALM_HEIGHT = 2400;
 
-    // --- Firebase Data Fetching Effect ---
+    // --- Simplified Firebase Data Fetching Effect ---
     useEffect(() => {
         const authenticateAndFetch = async () => {
             try {
-                // Ensure user is signed in
                 if (!auth.currentUser) {
                     await signInAnonymously(auth);
                 }
                 setUserId(auth.currentUser.uid);
 
-                // Set up the listener for orbs
                 const orbsCollectionRef = collection(db, `artifacts/${appId}/public/data/orbs`);
                 const q = query(orbsCollectionRef, orderBy("timestamp", "asc"));
 
                 const unsubscribe = onSnapshot(q, (querySnapshot) => {
                     const orbsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                     setOrbs(orbsData);
-                    // Auto-scroll to the latest orb
                     if (scrollerRef.current) {
                         scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
                     }
@@ -50,7 +47,7 @@ function ProgressToHeavenPage() {
                     console.error("Firebase onSnapshot error: ", error);
                 });
 
-                return unsubscribe; // Return the function to stop listening when the page is closed
+                return unsubscribe;
             } catch (authError) {
                 console.error("Authentication failed:", authError);
             }
@@ -63,7 +60,7 @@ function ProgressToHeavenPage() {
                 if (unsubscribe) unsubscribe();
             });
         };
-    }, [appId]); // Rerun if appId changes
+    }, [appId]);
 
     const handleOrbSubmit = async (e) => {
         e.preventDefault();
@@ -78,24 +75,17 @@ function ProgressToHeavenPage() {
                 name,
                 color: orbColor,
                 timestamp: new Date(),
-                userId 
+                userId
             });
-            
             sessionStorage.setItem('hasAwardedOrb', 'true');
             setHasAwardedOrb(true);
             setOrbName('');
-
-            // --- THIS IS THE TEST LINE ---
-            // If you see this alert, it means the orb was saved successfully.
-            alert("Orb saved successfully! The page should now update.");
-
         } catch (error) {
             console.error("Error saving orb:", error);
             alert("Failed to add orb. Please try again.");
         }
     };
 
-    // --- Calculation logic (no changes needed here) ---
     const stepHeight = 80;
     const pathHeight = (orbs.length * stepHeight) + 300;
     let totalHeight = pathHeight;
@@ -179,7 +169,6 @@ function ProgressToHeavenPage() {
                 <div className="orb-counter-container">
                     Total Orbs on Gerry's Path: <span className="orb-count">{orbs.length}</span>
                 </div>
-                {/* This now uses the correct sessionStorage logic to decide what to show */}
                 {hasAwardedOrb ? (
                     <div className="orb-awarded-message">
                         <h3>Gerry Thanks You For Your Orb</h3>
