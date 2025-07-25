@@ -7,6 +7,7 @@ import CardSelectionPage from "./CardSelectionPage";
 import ReadingDisplayPage from "./ReadingDisplayPage";
 import ProgressToHeavenPage from "./ProgressToHeavenPage";
 import AboutGerryPage from "./AboutGerryPage"; 
+import PrintShopPage from "./PrintShopPage"; // Added import for the new shop component
 import { CARD_DATA } from "./cardData";
 
 // --- THIS IS THE MISSING LINE ---
@@ -29,6 +30,10 @@ const Header = ({ setPage, page }) => (
         className={page === "progress-to-heaven" ? "nav-active" : ""}
       >
         Progress to Heaven
+      </a>
+      {/* Added link to the new Print Shop page */}
+      <a href="#shop" onClick={() => setPage("shop")} className={page === "shop" ? "nav-active" : ""}>
+        The Print Shop
       </a>
     </nav>
   </header>
@@ -80,6 +85,9 @@ function App() {
         return <AboutGerryPage />;
       case "progress-to-heaven":
         return <ProgressToHeavenPage />;
+      // Added case for the new Print Shop page
+      case "shop":
+        return <PrintShopPage setPage={setPage} />;
       case "home":
       default:
         return <HomePage setPage={setPage} />;
