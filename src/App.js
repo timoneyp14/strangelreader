@@ -6,12 +6,9 @@ import HomePage from "./HomePage";
 import CardSelectionPage from "./CardSelectionPage";
 import ReadingDisplayPage from "./ReadingDisplayPage";
 import ProgressToHeavenPage from "./ProgressToHeavenPage";
-import AboutGerryPage from "./AboutGerryPage"; 
-import PrintShopPage from "./PrintShopPage"; // Added import for the new shop component
+import GerrysJournalPage from "./GerrysJournalPage"; 
+import PrintShopPage from "./PrintShopPage";
 import { CARD_DATA } from "./cardData";
-
-// --- THIS IS THE MISSING LINE ---
-import './ProgressToHeavenPage.css';
 
 // --- Header ---
 const Header = ({ setPage, page }) => (
@@ -21,8 +18,8 @@ const Header = ({ setPage, page }) => (
       <a href="#home" onClick={() => setPage("home")} className={page === "home" ? "nav-active" : ""}>
         Home
       </a>
-      <a href="#about" onClick={() => setPage("about-gerry")} className={page === "about-gerry" ? "nav-active" : ""}>
-        About Gerry
+      <a href="#journal" onClick={() => setPage("journal")} className={page === "journal" ? "nav-active" : ""}>
+        Gerry's Journal
       </a>
       <a
         href="#progress"
@@ -31,7 +28,6 @@ const Header = ({ setPage, page }) => (
       >
         Progress to Heaven
       </a>
-      {/* Added link to the new Print Shop page */}
       <a href="#shop" onClick={() => setPage("shop")} className={page === "shop" ? "nav-active" : ""}>
         The Print Shop
       </a>
@@ -39,20 +35,44 @@ const Header = ({ setPage, page }) => (
   </header>
 );
 
-// --- Footer ---
-const Footer = () => (
-  <footer className="app-footer">
-    <p>© 2025 Strangel Readings. All rights reserved.</p>
-  </footer>
-);
+// --- NEW, UPDATED FOOTER COMPONENT ---
+const Footer = ({ setIsAdmin }) => {
+  const [clickCount, setClickCount] = useState(0);
+
+  const handleFooterClick = () => {
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
+
+    // When the count reaches 5, ask for the password
+    if (newCount >= 5) {
+      const password = prompt("Please enter the admin password:");
+      if (password === "GerrysHelper") {
+        alert("Admin access granted! You can now post as Archangel Gerry.");
+        setIsAdmin(true);
+      } else if (password) { // Only show alert if a password was entered
+        alert("Incorrect password.");
+      }
+      setClickCount(0); // Reset for next time
+    }
+  };
+
+  return (
+    <footer className="app-footer">
+      <p onClick={handleFooterClick} style={{cursor: 'pointer', userSelect: 'none'}}>
+        © 2025 Strangel Readings. All rights reserved.
+      </p>
+    </footer>
+  );
+};
+
 
 // --- App Component ---
 function App() {
   const [page, setPage] = useState("home");
   const [userQuery, setUserQuery] = useState("");
   const [selectedCards, setSelectedCards] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false); // Manages admin status
 
-  // Reset state when leaving reading pages
   useEffect(() => {
     if (page !== "reading-display" && page !== "well-of-wisdom") {
       setUserQuery("");
@@ -81,11 +101,11 @@ function App() {
             setPage={setPage}
           />
         );
-      case "about-gerry":
-        return <AboutGerryPage />;
+      case "journal":
+        // Pass the admin status to the journal page
+        return <GerrysJournalPage isAdmin={isAdmin} />;
       case "progress-to-heaven":
         return <ProgressToHeavenPage />;
-      // Added case for the new Print Shop page
       case "shop":
         return <PrintShopPage setPage={setPage} />;
       case "home":
@@ -98,7 +118,7 @@ function App() {
     <div className="App">
       <Header setPage={setPage} page={page} />
       <main className="app-content">{renderPage()}</main>
-      <Footer />
+      <Footer setIsAdmin={setIsAdmin} />
     </div>
   );
 }
