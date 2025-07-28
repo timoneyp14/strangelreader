@@ -795,3 +795,37 @@ body {
 .share-button:hover {
     background-color: #581c87;
 }
+/* =================================== */
+/* Enlarged Card Modal Styles          */
+/* =================================== */
+
+.enlarged-card-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+    animation: dissolve-in 0.3s ease-in-out;
+}
+
+.enlarged-card-modal {
+    width: 80vw;
+    max-width: 400px;
+    aspect-ratio: 2 / 3;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+    cursor: default;
+}
+
+.enlarged-card-modal img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

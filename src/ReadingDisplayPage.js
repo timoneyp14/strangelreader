@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MementoPage from './MementoPage'; // Import our new component
+import MementoPage from './MementoPage';
 
 // A simple loader component
 const Loader = () => <div className="loader"></div>;
@@ -8,7 +8,8 @@ function ReadingDisplayPage({ userQuery, selectedCards, cardData, setPage }) {
     const [interpretation, setInterpretation] = useState('');
     const [memento, setMemento] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    // The 'enlargedCard' state and 'handleCardClick' function have been removed for the new layout.
+    // --- FEATURE RESTORED: State to manage the enlarged card ---
+    const [enlargedCardId, setEnlargedCardId] = useState(null);
     const [showMementoPage, setShowMementoPage] = useState(false); 
 
     const readingCards = cardData.filter(card => selectedCards.includes(card.id));
@@ -81,17 +82,20 @@ ${cardDetails}
         );
     }
 
+    const enlargedCard = enlargedCardId ? cardData.find(card => card.id === enlargedCardId) : null;
+
+    // --- FEATURE RESTORED: The 'card-selection-page' class provides the dissolve-in animation ---
     return (
-        <div className="page-container reading-page-bg">
+        <div className="page-container reading-page-bg card-selection-page">
             <header>
                 <h1>Your Strangel Reading</h1>
                 <p className="well-text">Click on a card to see it more closely.</p>
             </header>
             <main>
                 <div className="reading-cards-grid">
-                    {/* Simplified card rendering without the enlarge-on-click logic */}
+                    {/* --- FEATURE RESTORED: onClick handler added to each card --- */}
                     {readingCards.map(card => (
-                        <div key={card.id} className="reading-card">
+                        <div key={card.id} className="reading-card" onClick={() => setEnlargedCardId(card.id)}>
                             <img src={card.imageSrc} alt={card.name} />
                         </div>
                     ))}
@@ -124,6 +128,15 @@ ${cardDetails}
                     Start a New Reading
                 </button>
             </main>
+
+            {/* --- FEATURE RESTORED: Modal for displaying the enlarged card --- */}
+            {enlargedCard && (
+                <div className="enlarged-card-overlay" onClick={() => setEnlargedCardId(null)}>
+                    <div className="enlarged-card-modal">
+                        <img src={enlargedCard.imageSrc} alt={enlargedCard.name} />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
