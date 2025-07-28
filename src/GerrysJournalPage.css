@@ -1,15 +1,27 @@
-/* --- Scoped Styles for Journal Page --- */
+/* ===================================================================== */
+/* Updated Styles for Gerry's Journal Page for Site Consistency     */
+/* ===================================================================== */
+
+/* The main wrapper no longer has a background color. 
+   The lilac color will now come from the global 'body' style in App.css. */
 .journal-page-wrapper {
     font-family: "Georgia", "Times New Roman", serif;
-    background-color: #e9d5ff; /* This is the key change - background is on the wrapper */
     color: #333;
     padding: 1px 0; /* Prevents margin collapse */
 }
 
+/* --- THE FIX IS HERE --- */
+/* This class now mimics the '.page-container' style from App.css.
+   The max-width has been removed and the margin updated for consistency. */
 .journal-page-wrapper .journal-wrapper {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 1rem;
+    background-color: #faf5ff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px 40px;
+    text-align: center; /* Center the main title */
+    
+    /* This margin now matches the .page-container class in App.css */
+    margin: 0 1rem 1rem 1rem;
 }
 
 .journal-page-wrapper .journal-main-title {
@@ -20,6 +32,7 @@
     margin-bottom: 2.5rem;
 }
 
+/* The content cards inside are now constrained and centered */
 .journal-page-wrapper .journal-entry-card, 
 .journal-page-wrapper .journal-archive-card, 
 .journal-page-wrapper .journal-comments-card {
@@ -28,6 +41,12 @@
     border-radius: 12px;
     padding: 2rem 2.5rem;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    text-align: left; /* Reset text alignment for card content */
+
+    /* Keep content readable by constraining width and centering */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 3rem;
 }
 
