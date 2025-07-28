@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-// Correctly import the database instance from your central firebase.js file
-import { db } from './firebase'; // Make sure this path is correct!
+import { db } from './firebase'; 
 import { collection, getDocs, onSnapshot, addDoc, serverTimestamp, query, orderBy } from 'firebase/firestore';
 import './GerrysJournalPage.css';
 
-// --- Gerry's Journal Page Component ---
-const GerrysJournalPage = ({ isAdmin }) => { // Receives isAdmin as a prop
+const GerrysJournalPage = ({ isAdmin }) => {
     const [journalEntries, setJournalEntries] = useState([]);
     const [activeEntry, setActiveEntry] = useState(null);
     const [comments, setComments] = useState([]);
@@ -14,10 +12,8 @@ const GerrysJournalPage = ({ isAdmin }) => { // Receives isAdmin as a prop
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Fetch journal entries from Firestore on component mount with cleanup
     useEffect(() => {
-        let isMounted = true; // Flag to track if the component is mounted
-
+        let isMounted = true;
         const fetchEntries = async () => {
             try {
                 setLoading(true);
@@ -25,11 +21,9 @@ const GerrysJournalPage = ({ isAdmin }) => { // Receives isAdmin as a prop
                 const entrySnapshot = await getDocs(entriesCollection);
                 const entriesList = entrySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 
-                // Only update state if the component is still mounted
                 if (isMounted) {
                     const sortedEntries = entriesList.sort((a, b) => a.order - b.order);
                     const reversedEntries = [...sortedEntries].reverse();
-
                     setJournalEntries(reversedEntries);
                     if (reversedEntries.length > 0) {
                         setActiveEntry(reversedEntries[0]);
@@ -38,29 +32,22 @@ const GerrysJournalPage = ({ isAdmin }) => { // Receives isAdmin as a prop
                 }
             } catch (e) {
                 console.error("Error fetching entries:", e);
-                // Only update state if the component is still mounted
                 if (isMounted) {
                     setError("Could not load Gerry's journal. The connection to the celestial plane might be down.");
                     setLoading(false);
                 }
             }
         };
-
         fetchEntries();
-
-        // The cleanup function: this runs when the component unmounts
         return () => {
             isMounted = false;
         };
-    }, []); // Empty dependency array ensures this runs only once on mount
+    }, []);
 
-    // Fetch comments for the active entry and listen for real-time updates
     useEffect(() => {
         if (!activeEntry) return;
-
         const commentsCollection = collection(db, 'journal', activeEntry.id, 'comments');
         const q = query(commentsCollection, orderBy('timestamp', 'asc'));
-
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const commentsList = querySnapshot.docs.map(doc => ({
                 id: doc.id,
@@ -74,8 +61,6 @@ const GerrysJournalPage = ({ isAdmin }) => { // Receives isAdmin as a prop
             console.error("Error fetching comments:", err);
             setError("Could not load comments for this entry.");
         });
-
-        // This cleanup for the listener was already correct, which is good!
         return () => unsubscribe();
     }, [activeEntry]);
 
@@ -89,14 +74,12 @@ const GerrysJournalPage = ({ isAdmin }) => { // Receives isAdmin as a prop
         setNewComment(prev => ({ ...prev, [name]: value }));
     };
 
-    // Handle submitting a new comment to Firestore
     const handleCommentSubmit = async (e) => {
         e.preventDefault();
         if (!newComment.author.trim() || !newComment.text.trim() || !activeEntry) {
             console.warn("Comment submission blocked: all fields required.");
             return;
         }
-
         try {
             const commentsCollection = collection(db, 'journal', activeEntry.id, 'comments');
             await addDoc(commentsCollection, {
@@ -132,9 +115,10 @@ const GerrysJournalPage = ({ isAdmin }) => { // Receives isAdmin as a prop
                     <>
                         <article className="journal-entry-card">
                             <div className="social-share-container">
-                                <a href="#" className="social-share-link">Share on X</a>
-                                <a href="#" className="social-share-link">Share on Facebook</a>
-                                <a href="#" className="social-share-link">Copy Link</a>
+                                {/* --- THE FIX IS HERE: Changed <a> tags to <button> tags --- */}
+                                <button onClick={() => alert('Sharing to X!')} className="social-share-link">Share on X</button>
+                                <button onClick={() => alert('Sharing to Facebook!')} className="social-share-link">Share on Facebook</button>
+                                <button onClick={() => alert('Link copied!')} className="social-share-link">Copy Link</button>
                             </div>
                             <h2>{activeEntry.title}</h2>
                             <div 

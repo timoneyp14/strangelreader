@@ -8,7 +8,6 @@ function ReadingDisplayPage({ userQuery, selectedCards, cardData, setPage }) {
     const [interpretation, setInterpretation] = useState('');
     const [memento, setMemento] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    // --- FEATURE RESTORED: State to manage the enlarged card ---
     const [enlargedCardId, setEnlargedCardId] = useState(null);
     const [showMementoPage, setShowMementoPage] = useState(false); 
 
@@ -39,7 +38,9 @@ ${cardDetails}
             prompt += `\nThey have not asked a question, so please use the card details as your sole guide to provide the wisdom they most need to hear.`;
         }
 
-        prompt += `\n\nAfter the main reading, on a new line, provide a single, unique sentence that encapsulates the core wisdom of this specific reading. Start this line with "Memento:"`;
+        // --- THE FIX IS HERE ---
+        // The prompt now explicitly asks for a maximum of 30 words for the Memento text.
+        prompt += `\n\nAfter the main reading, on a new line, provide a single, unique sentence that encapsulates the core wisdom of this specific reading. This sentence must be a maximum of 30 words. Start this line with "Memento:"`;
 
         try {
             const response = await fetch("https://us-central1-strangelreadingslive.cloudfunctions.net/getReading", {
@@ -84,7 +85,6 @@ ${cardDetails}
 
     const enlargedCard = enlargedCardId ? cardData.find(card => card.id === enlargedCardId) : null;
 
-    // --- FEATURE RESTORED: The 'card-selection-page' class provides the dissolve-in animation ---
     return (
         <div className="page-container reading-page-bg card-selection-page">
             <header>
@@ -93,7 +93,6 @@ ${cardDetails}
             </header>
             <main>
                 <div className="reading-cards-grid">
-                    {/* --- FEATURE RESTORED: onClick handler added to each card --- */}
                     {readingCards.map(card => (
                         <div key={card.id} className="reading-card" onClick={() => setEnlargedCardId(card.id)}>
                             <img src={card.imageSrc} alt={card.name} />
@@ -129,7 +128,6 @@ ${cardDetails}
                 </button>
             </main>
 
-            {/* --- FEATURE RESTORED: Modal for displaying the enlarged card --- */}
             {enlargedCard && (
                 <div className="enlarged-card-overlay" onClick={() => setEnlargedCardId(null)}>
                     <div className="enlarged-card-modal">

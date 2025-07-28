@@ -193,9 +193,6 @@ html, body, #root {
     height: 100%;
 }
 
-/* --- THE FIX IS HERE --- */
-/* The 'display: flex' and 'justify-content' rules have been removed. */
-/* This creates a more stable, standard block-level layout for the body. */
 body {
     font-family: "Georgia", "Times New Roman", serif;
     background-color: #e9d5ff;
@@ -206,7 +203,7 @@ body {
 .App {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto; /* This properly centers the app content */
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -491,9 +488,11 @@ body {
     font-style: italic;
     font-weight: bold;
 }
-/* Card Selection Page */
+
+/* --- THE FIX IS HERE --- */
+/* Card Selection Page animation duration is now 5 seconds */
 .card-selection-page {
-    animation: dissolve-in 2s ease-in-out; 
+    animation: dissolve-in 5s ease-in-out; 
 }
 
 .card-grid {
@@ -658,143 +657,8 @@ body {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-/* =================================== */
-/* Memento Page Styles                 */
-/* =================================== */
 
-.memento-page-background {
-    background-color: #FEF3C7;
-    border-radius: 8px;
-    padding: 40px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 0 1rem 1rem 1rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.memento-container {
-    width: 600px;
-    height: 600px; 
-    font-family: 'Cinzel', serif;
-    color: #44403c; 
-    text-align: center;
-    padding: 40px;
-    box-sizing: border-box;
-    background-color: #faf5ff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    border-radius: 1rem;
-    border: 2px solid rgba(168, 85, 247, 0.3);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), inset 0 0 25px 15px rgba(168, 85, 247, 0.15);
-    margin-bottom: 40px; 
-    position: relative;
-    overflow: hidden;
-}
-
-.memento-container .branding {
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(68, 64, 60, 0.7); 
-    position: relative; /* Add this */
-    z-index: 30; /* Add this to bring it in front */
-}
-
-.memento-container .card-display-area {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.memento-container .card-wrapper {
-    position: absolute;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.2); 
-    border-radius: 1rem;
-    overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.memento-container .hero-card {
-    width: 240px; 
-    height: 360px;
-    z-index: 10;
-}
-
-.memento-container .background-card {
-    width: 200px;
-    height: 300px;
-    opacity: 0.4;
-    z-index: 5;
-}
-
-.memento-container .card-behind-1 {
-    transform: translateY(-20px) translateX(-90px) rotate(-15deg);
-}
-.memento-container .card-behind-2 {
-    transform: translateY(-40px) rotate(0deg);
-}
-.memento-container .card-behind-3 {
-    transform: translateY(-20px) translateX(90px) rotate(15deg);
-}
-
-.memento-container .card-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.memento-container .answer-text-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 20;
-    padding: 40px 10px 20px 10px;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.8) 100%);
-}
-
-.memento-container .answer-text {
-    font-size: 1.1rem;
-    font-style: italic;
-    max-width: 90%;
-    color: rgba(255, 255, 255, 0.9); 
-    line-height: 1.5;
-    margin: 0 auto;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-}
-
-.memento-buttons-container {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-}
-
-.share-button {
-    font-family: "Georgia", "Times New Roman", serif;
-    background-color: #6b21a8;
-    color: white;
-    font-weight: bold;
-    padding: 0.75rem 2rem;
-    border-radius: 0.375rem;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.2s;
-}
-
-.share-button:hover {
-    background-color: #581c87;
-}
 /* =================================== */
 /* Enlarged Card Modal Styles          */
 /* =================================== */
@@ -811,6 +675,7 @@ body {
     align-items: center;
     z-index: 1000;
     cursor: pointer;
+    /* Reverted to a quicker, more responsive time for the modal */
     animation: dissolve-in 0.3s ease-in-out;
 }
 
