@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-// Use the central Firebase config, just like the rest of the app
 import { auth, db, appId } from './firebase'; 
 import { signInAnonymously } from 'firebase/auth';
-import { collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from 'firebase/firestore';
+import './ProgressToHeavenPage.css'; // Ensure this CSS file is imported
 
 // --- Component Definition ---
 function ProgressToHeavenPage() {
@@ -25,19 +25,18 @@ function ProgressToHeavenPage() {
     ];
     const REALM_HEIGHT = 2400;
 
-    // --- Simplified Firebase Data Fetching Effect ---
+    // --- Robust Firebase Data Fetching ---
     useEffect(() => {
+        let unsubscribeFromOrbs;
         const authenticateAndFetch = async () => {
             try {
                 if (!auth.currentUser) {
                     await signInAnonymously(auth);
                 }
                 setUserId(auth.currentUser.uid);
-
                 const orbsCollectionRef = collection(db, `artifacts/${appId}/public/data/orbs`);
                 const q = query(orbsCollectionRef, orderBy("timestamp", "asc"));
-
-                const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                unsubscribeFromOrbs = onSnapshot(q, (querySnapshot) => {
                     const orbsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                     setOrbs(orbsData);
                     if (scrollerRef.current) {
@@ -46,26 +45,22 @@ function ProgressToHeavenPage() {
                 }, (error) => {
                     console.error("Firebase onSnapshot error: ", error);
                 });
-
-                return unsubscribe;
-            } catch (authError) {
-                console.error("Authentication failed:", authError);
+            } catch (error) {
+                console.error("Authentication or data fetch failed:", error);
             }
         };
-
-        const unsubscribePromise = authenticateAndFetch();
-
+        authenticateAndFetch();
         return () => {
-            unsubscribePromise.then(unsubscribe => {
-                if (unsubscribe) unsubscribe();
-            });
+            if (unsubscribeFromOrbs) {
+                unsubscribeFromOrbs();
+            }
         };
-    }, [appId]);
+    }, []);
 
     const handleOrbSubmit = async (e) => {
         e.preventDefault();
         if (!db || !userId) {
-            alert("Connection not ready. Please try again in a moment.");
+            console.warn("Connection not ready. Please try again in a moment.");
             return;
         }
         const name = orbName.trim() || "An unnamed light";
@@ -74,7 +69,7 @@ function ProgressToHeavenPage() {
             await addDoc(orbsCollectionRef, {
                 name,
                 color: orbColor,
-                timestamp: new Date(),
+                timestamp: serverTimestamp(),
                 userId
             });
             sessionStorage.setItem('hasAwardedOrb', 'true');
@@ -82,7 +77,6 @@ function ProgressToHeavenPage() {
             setOrbName('');
         } catch (error) {
             console.error("Error saving orb:", error);
-            alert("Failed to add orb. Please try again.");
         }
     };
 
@@ -106,8 +100,11 @@ function ProgressToHeavenPage() {
         gerryTopPosition = lastOrbTop - 160; 
     }
 
+    // --- THE FIX IS HERE ---
+    // The component's root element now ONLY uses the '.progress-page' class,
+    // making it independent from the shared '.page-container' style from App.css.
     return (
-        <div className="page-container progress-page">
+        <div className="progress-page">
             <div className="realm-scroller" ref={scrollerRef}>
                 <div className="path-container" style={{ height: `${totalHeight}px` }}>
                     {[...Array(150)].map((_, i) => (

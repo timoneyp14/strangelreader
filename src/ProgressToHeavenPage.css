@@ -1,17 +1,35 @@
-/* Styles for the Progress to Heaven Page */
+/* ===================================================================== */
+/* Fully Scoped and Independent Styles for the Progress to Heaven Page */
+/* ===================================================================== */
+
+/* --- Foundational Layout --- */
 .progress-page {
-    background-color: #0f0c29;
-    color: #faf5ff;
-    padding: 20px;
+  /* Properties copied from App.css's .page-container to make this component self-sufficient */
+  background-color: #0f0c29; /* This page's own background color */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 1rem 1rem 1rem;
+  padding: 20px;
+  
+  /* Robust flexbox model to ensure stable layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #faf5ff;
 }
+
+/* --- Scoped Rules --- */
+/* All rules below are now guaranteed to apply only within .progress-page */
 
 .progress-page h2 {
     color: #e9d5ff;
+    text-align: center;
 }
 
-.realm-scroller {
+.progress-page .realm-scroller {
     width: 100%;
-    height: 70vh; /* Viewport height */
+    max-width: 1200px;
+    height: 70vh;
     overflow-y: scroll;
     overflow-x: hidden;
     border: 2px solid #4c1d95;
@@ -21,12 +39,12 @@
     margin-bottom: 2rem;
 }
 
-.path-container {
+.progress-page .path-container {
     position: relative;
     width: 100%;
 }
 
-.celestial-orb {
+.progress-page .celestial-orb {
     position: absolute;
     width: 25px;
     height: 25px;
@@ -38,12 +56,12 @@
     z-index: 20;
 }
 
-.celestial-orb:hover {
+.progress-page .celestial-orb:hover {
      transform: translate(-50%, -50%) scale(1.5);
      z-index: 100;
 }
 
-.orb-tooltip {
+.progress-page .orb-tooltip {
     visibility: hidden;
     width: 120px;
     background-color: rgba(0,0,0,0.7);
@@ -61,13 +79,12 @@
     font-size: 12px;
 }
 
-.celestial-orb:hover .orb-tooltip {
+.progress-page .celestial-orb:hover .orb-tooltip {
     visibility: visible;
     opacity: 1;
 }
 
-/* Gerry's wrapper is now positioned relative to the path */
-.gerry-wrapper {
+.progress-page .gerry-wrapper {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -76,7 +93,7 @@
     height: 150px; 
 }
 
-.gerry-character-container {
+.progress-page .gerry-character-container {
     width: 100%; 
     height: 100%;
     border-radius: 50%;
@@ -86,7 +103,7 @@
     position: relative;
 }
 
-.gerry-character-container::after {
+.progress-page .gerry-character-container::after {
     content: '';
     position: absolute;
     top: 0;
@@ -98,13 +115,13 @@
                 inset 0 -8px 15px rgba(0, 0, 0, 0.4);
 }
 
-.gerry-character-container img {
+.progress-page .gerry-character-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.realm-background {
+.progress-page .realm-background {
     position: absolute;
     left: 0;
     width: 100%;
@@ -119,7 +136,7 @@
     overflow: hidden;
 }
 
-.realm-title {
+.progress-page .realm-title {
     color: #fde047;
     font-size: 2rem;
     font-weight: bold;
@@ -128,7 +145,7 @@
     z-index: 12;
 }
 
-.next-realm-message {
+.progress-page .next-realm-message {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -143,7 +160,7 @@
     white-space: nowrap;
 }
 
-.bg-star {
+.progress-page .bg-star {
     position: absolute;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.7);
@@ -151,12 +168,7 @@
     z-index: 5;
 }
 
-@keyframes twinkle {
-    0%, 100% { opacity: 0.2; }
-    50% { opacity: 0.8; }
-}
-
-.nebula {
+.progress-page .nebula {
     position: absolute;
     width: 400px;
     height: 400px;
@@ -166,32 +178,36 @@
     opacity: 0.5;
 }
 
-.progress-text-content {
+.progress-page .progress-text-content {
     padding: 1rem;
     max-width: 800px;
+    width: 100%;
     margin: 1rem auto;
+    text-align: center;
 }
 
-.progress-text-content p {
+.progress-page .progress-text-content p {
     margin-bottom: 1rem;
     line-height: 1.6;
     color: #d8b4fe;
     font-size: 1.25rem;
 }
 
-.orb-counter-container {
+.progress-page .orb-counter-container {
     font-size: 1.25rem;
     margin: 2rem 0;
     color: #e9d5ff;
+    text-align: center;
 }
 
-.orb-count {
+.progress-page .orb-count {
     font-weight: bold;
     color: #fde047;
     font-size: 1.5rem;
 }
 
-.orb-contribution-container, .orb-awarded-message {
+.progress-page .orb-contribution-container, 
+.progress-page .orb-awarded-message {
     background-color: rgba(76, 29, 149, 0.4);
     padding: 2rem;
     border-radius: 1rem;
@@ -200,25 +216,27 @@
     border: 1px solid #581c87;
 }
 
-.orb-contribution-container h3, .orb-awarded-message h3 {
+.progress-page .orb-contribution-container h3, 
+.progress-page .orb-awarded-message h3 {
     margin-top: 0;
     color: #fde047;
+    text-align: center;
 }
 
-.orb-contribution-container form {
+.progress-page .orb-contribution-container form {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
 }
 
-.orb-contribution-container label {
+.progress-page .orb-contribution-container label {
     display: block;
     margin-bottom: 0.5rem;
     color: #d8b4fe;
 }
 
-.orb-contribution-container input[type="text"] {
+.progress-page .orb-contribution-container input[type="text"] {
     width: 100%;
     padding: 0.75rem;
     border-radius: 0.375rem;
@@ -228,7 +246,7 @@
     box-sizing: border-box;
 }
 
-.orb-contribution-container input[type="color"] {
+.progress-page .orb-contribution-container input[type="color"] {
     width: 100%;
     height: 50px;
     border: none;
@@ -237,7 +255,7 @@
     cursor: pointer;
 }
 
-.orb-contribution-container button {
+.progress-page .orb-contribution-container button {
     background-color: #f59e0b;
     color: #4a148c;
     font-weight: bold;
@@ -248,6 +266,11 @@
     font-size: 1rem;
 }
 
-.orb-contribution-container button:hover {
+.progress-page .orb-contribution-container button:hover {
     background-color: #d97706;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.8; }
 }

@@ -1,3 +1,10 @@
+/* --- Universal Box-Sizing Rule --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 /* =================================== */
 /* Mobile & Tablet Styles              */
 /* =================================== */
@@ -185,17 +192,21 @@
 html, body, #root {
     height: 100%;
 }
+
+/* --- THE FIX IS HERE --- */
+/* The 'display: flex' and 'justify-content' rules have been removed. */
+/* This creates a more stable, standard block-level layout for the body. */
 body {
     font-family: "Georgia", "Times New Roman", serif;
     background-color: #e9d5ff;
     color: #333;
     margin: 0;
-    display: flex;
-    justify-content: center;
 }
+
 .App {
   width: 100%;
   max-width: 1200px;
+  margin: 0 auto; /* This properly centers the app content */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
