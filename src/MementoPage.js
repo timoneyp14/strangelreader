@@ -35,8 +35,11 @@ const styles = {
         alignItems: 'center',
     },
     branding: {
-        fontSize: '2.2rem',
-        letterSpacing: '0.1em',
+        // --- THE FIX IS HERE ---
+        // More aggressive responsive font size for mobile.
+        // Letter spacing is also reduced to save space.
+        fontSize: 'clamp(1rem, 4.5vw, 2.2rem)',
+        letterSpacing: '0.05em',
         textTransform: 'uppercase',
         color: 'rgba(0, 0, 0, 0.6)',
         fontWeight: '700',
@@ -71,8 +74,6 @@ const styles = {
         aspectRatio: '2 / 3',
         zIndex: 5,
     },
-    // --- THE FIX IS HERE ---
-    // The transform for cardBehind2 is now perfectly symmetrical with the other two.
     cardBehind1: { transform: 'translateY(-5%) translateX(-35%) rotate(-18deg)' },
     cardBehind2: { transform: 'translateY(-10%) rotate(0deg)' },
     cardBehind3: { transform: 'translateY(-5%) translateX(35%) rotate(18deg)' },
@@ -82,13 +83,15 @@ const styles = {
         left: 0,
         right: 0,
         zIndex: 20,
-        padding: '50px 40px 15px 40px',
+        padding: '50px 25px 15px 25px', // Reduced side padding to make text wider
         background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, transparent 100%)',
     },
     answerText: {
         fontFamily: "'Lora', serif",
         fontStyle: 'italic',
-        fontSize: '1.8rem',
+        // --- THE FIX IS HERE ---
+        // More aggressive responsive font size for mobile.
+        fontSize: 'clamp(0.9rem, 3.5vw, 1.8rem)',
         color: '#fff',
         lineHeight: 1.5,
         margin: '0 auto',
