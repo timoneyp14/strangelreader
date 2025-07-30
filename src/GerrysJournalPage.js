@@ -12,6 +12,27 @@ const GerrysJournalPage = ({ isAdmin }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // --- NEW: Mobile-specific styles ---
+    const mobileStyles = `
+        @media (max-width: 768px) {
+            .journal-page-wrapper .journal-entry-card, 
+            .journal-page-wrapper .journal-archive-card, 
+            .journal-page-wrapper .journal-comments-card {
+                /* Reduce side padding on mobile to give text more room */
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .journal-page-wrapper .journal-wrapper {
+                /* Reduce side margins on mobile */
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+    `;
+
     useEffect(() => {
         let isMounted = true;
         const fetchEntries = async () => {
@@ -107,96 +128,98 @@ const GerrysJournalPage = ({ isAdmin }) => {
     }
 
     return (
-        <div className="journal-page-wrapper">
-            <div className="journal-wrapper">
-                <h1 className="journal-main-title">From the Journal of Archangel Gerry</h1>
-                
-                {activeEntry && (
-                    <>
-                        <article className="journal-entry-card">
-                            <div className="social-share-container">
-                                {/* --- THE FIX IS HERE: Changed <a> tags to <button> tags --- */}
-                                <button onClick={() => alert('Sharing to X!')} className="social-share-link">Share on X</button>
-                                <button onClick={() => alert('Sharing to Facebook!')} className="social-share-link">Share on Facebook</button>
-                                <button onClick={() => alert('Link copied!')} className="social-share-link">Copy Link</button>
-                            </div>
-                            <h2>{activeEntry.title}</h2>
-                            <div 
-                                className="journal-entry-content"
-                                dangerouslySetInnerHTML={{ __html: activeEntry.content }} 
-                            />
-                        </article>
-
-                        <section className="journal-comments-card">
-                            <h3>Share Your Thoughts</h3>
-                            <form className="comment-form" onSubmit={handleCommentSubmit}>
-                                <input 
-                                    type="text" 
-                                    name="author"
-                                    placeholder="Your Name" 
-                                    value={newComment.author}
-                                    onChange={handleCommentChange}
-                                    required
+        <>
+            <style>{mobileStyles}</style>
+            <div className="journal-page-wrapper">
+                <div className="journal-wrapper">
+                    <h1 className="journal-main-title">From the Journal of Archangel Gerry</h1>
+                    
+                    {activeEntry && (
+                        <>
+                            <article className="journal-entry-card">
+                                <div className="social-share-container">
+                                    <button onClick={() => alert('Sharing to X!')} className="social-share-link">Share on X</button>
+                                    <button onClick={() => alert('Sharing to Facebook!')} className="social-share-link">Share on Facebook</button>
+                                    <button onClick={() => alert('Link copied!')} className="social-share-link">Copy Link</button>
+                                </div>
+                                <h2>{activeEntry.title}</h2>
+                                <div 
+                                    className="journal-entry-content"
+                                    dangerouslySetInnerHTML={{ __html: activeEntry.content }} 
                                 />
-                                <textarea 
-                                    name="text"
-                                    placeholder="Leave your comment here..."
-                                    value={newComment.text}
-                                    onChange={handleCommentChange}
-                                    required
-                                ></textarea>
+                            </article>
+
+                            <section className="journal-comments-card">
+                                <h3>Share Your Thoughts</h3>
+                                <form className="comment-form" onSubmit={handleCommentSubmit}>
+                                    <input 
+                                        type="text" 
+                                        name="author"
+                                        placeholder="Your Name" 
+                                        value={newComment.author}
+                                        onChange={handleCommentChange}
+                                        required
+                                    />
+                                    <textarea 
+                                        name="text"
+                                        placeholder="Leave your comment here..."
+                                        value={newComment.text}
+                                        onChange={handleCommentChange}
+                                        required
+                                    ></textarea>
+                                    
+                                    {isAdmin && (
+                                        <div className="admin-checkbox-container">
+                                          <input 
+                                            type="checkbox" 
+                                            id="isGerryPost" 
+                                            checked={isGerryPost} 
+                                            onChange={(e) => setIsGerryPost(e.target.checked)} 
+                                          />
+                                          <label htmlFor="isGerryPost">Post as Archangel Gerry</label>
+                                        </div>
+                                    )}
+
+                                    <button type="submit">Submit Comment</button>
+                                </form>
                                 
-                                {isAdmin && (
-                                    <div className="admin-checkbox-container">
-                                      <input 
-                                        type="checkbox" 
-                                        id="isGerryPost" 
-                                        checked={isGerryPost} 
-                                        onChange={(e) => setIsGerryPost(e.target.checked)} 
-                                      />
-                                      <label htmlFor="isGerryPost">Post as Archangel Gerry</label>
-                                    </div>
+                                {comments.length > 0 ? (
+                                    <ul className="comments-list">
+                                        {comments.map(comment => (
+                                            <li key={comment.id} className={`comment-item ${comment.isGerry ? 'gerry-reply' : ''}`}>
+                                                <span className="comment-timestamp">{comment.timestamp}</span>
+                                                <p className="comment-author">{comment.author} says:</p>
+                                                <p className="comment-text">{comment.text}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p className="no-comments-message">Be the first to share your thoughts with Gerry.</p>
                                 )}
+                            </section>
+                        </>
+                    )}
 
-                                <button type="submit">Submit Comment</button>
-                            </form>
-                            
-                            {comments.length > 0 ? (
-                                <ul className="comments-list">
-                                    {comments.map(comment => (
-                                        <li key={comment.id} className={`comment-item ${comment.isGerry ? 'gerry-reply' : ''}`}>
-                                            <span className="comment-timestamp">{comment.timestamp}</span>
-                                            <p className="comment-author">{comment.author} says:</p>
-                                            <p className="comment-text">{comment.text}</p>
-                                        </li>
-                                    ))}
-                                </ul>
-                            ) : (
-                                <p className="no-comments-message">Be the first to share your thoughts with Gerry.</p>
-                            )}
+                    {archiveEntries.length > 0 && (
+                        <section className="journal-archive-card">
+                            <h3>Previous Entries</h3>
+                            <ul className="journal-archive-list">
+                                {archiveEntries.map(entry => (
+                                    <li key={entry.id} className="journal-archive-item">
+                                        <button 
+                                            className="journal-archive-link" 
+                                            onClick={() => handleEntrySelect(entry)}
+                                        >
+                                            {entry.title}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
                         </section>
-                    </>
-                )}
-
-                {archiveEntries.length > 0 && (
-                    <section className="journal-archive-card">
-                        <h3>Previous Entries</h3>
-                        <ul className="journal-archive-list">
-                            {archiveEntries.map(entry => (
-                                <li key={entry.id} className="journal-archive-item">
-                                    <button 
-                                        className="journal-archive-link" 
-                                        onClick={() => handleEntrySelect(entry)}
-                                    >
-                                        {entry.title}
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    </section>
-                )}
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
