@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 import MementoPage from './MementoPage';
 
-// A simple loader component - this can be enhanced if desired
-const Loader = ({ message }) => (
-    <div className="loader-container">
-        <div className="loader"></div>
-        <p className="loading-message">{message}</p>
-    </div>
-);
-
+// A simple loader component
+const Loader = () => <div className="loader"></div>;
 
 function ReadingDisplayPage({ userQuery, selectedCards, cardData, setPage }) {
     const [interpretation, setInterpretation] = useState('');
@@ -16,16 +10,26 @@ function ReadingDisplayPage({ userQuery, selectedCards, cardData, setPage }) {
     const [isLoading, setIsLoading] = useState(false);
     const [enlargedCardId, setEnlargedCardId] = useState(null);
     const [showMementoPage, setShowMementoPage] = useState(false); 
-    // --- NEW: State for more descriptive loading messages ---
-    const [loadingMessage, setLoadingMessage] = useState("Archangel Gerry is consulting the celestial planes...");
 
     const readingCards = cardData.filter(card => selectedCards.includes(card.id));
+
+    // --- NEW: Component-specific styles for mobile layout ---
+    const pageStyles = `
+        @media (max-width: 768px) {
+            .reading-cards-grid {
+                /* Center the grid on mobile */
+                margin-left: auto;
+                margin-right: auto;
+                /* Adjust width to give some padding on the sides */
+                max-width: 90%; 
+            }
+        }
+    `;
 
     const getInterpretation = async () => {
         setIsLoading(true);
         setInterpretation('');
         setMemento('');
-        setLoadingMessage("Archangel Gerry is consulting the celestial planes..."); // Reset message
 
         const cardDetails = readingCards.map(card => {
             const randomIndex = Math.floor(Math.random() * card.interpretationPrompts.length);
@@ -49,59 +53,35 @@ ${cardDetails}
 
         prompt += `\n\nAfter the main reading, on a new line, provide a single, unique sentence that encapsulates the core wisdom of this specific reading. This sentence must be a maximum of 30 words. Start this line with "Memento:"`;
 
-        // --- Retry Logic Implementation ---
-        const maxRetries = 3;
-        let attempt = 0;
-        
-        while (attempt < maxRetries) {
-            try {
-                const response = await fetch("https://us-central1-strangelreadingslive.cloudfunctions.net/getReading", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ prompt })
-                });
+        try {
+            const response = await fetch("https://us-central1-strangelreadingslive.cloudfunctions.net/getReading", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ prompt })
+            });
 
-                if (!response.ok) {
-                    // This will be caught by the catch block below and trigger a retry
-                    // We include the status to provide more detailed error logging.
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                const resultText = data.text;
-
-                if (resultText) {
-                    const parts = resultText.split("\nMemento:");
-                    setInterpretation(parts[0].trim());
-                    setMemento(parts[1] ? parts[1].trim() : "May your path be strange and wonderful.");
-                } else {
-                    // If we get a valid response but no text, treat it as an error to retry
-                    throw new Error("Empty response from the celestial planes.");
-                }
-                
-                // If we succeed, exit the loop
-                break; 
-
-            } catch (error) {
-                attempt++;
-                // --- UPDATED: More detailed error logging ---
-                console.error(`Reading generation attempt ${attempt} failed. Reason:`, error.message);
-
-                if (attempt >= maxRetries) {
-                    // If this was the last attempt, set the final error message
-                    setInterpretation("Gerry's connection to the celestial planes seems to be blocked by cosmic interference. Please check your internet connection and try your reading again. If the problem persists, the heavens may need a moment to clear.");
-                    break; 
-                } else {
-                    // If we have more retries left, wait and update the message
-                    setLoadingMessage("The connection is faint... trying again.");
-                    const delay = Math.pow(2, attempt) * 1000; // Exponential backoff: 2s, 4s
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                }
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-        }
-        // --- End of Retry Logic ---
 
-        setIsLoading(false);
+            const data = await response.json();
+            const resultText = data.text;
+
+            if (resultText) {
+                const parts = resultText.split("\nMemento:");
+                setInterpretation(parts[0].trim());
+                setMemento(parts[1] ? parts[1].trim() : "May your path be strange and wonderful.");
+            } else {
+                setInterpretation("Gerry and Gemini seem to be in a deep consultation. Please try again in a moment.");
+            }
+        } catch (error) {
+            console.error("Error calling function:", error);
+            setInterpretation("It seems there was a disturbance in the cosmic connection. Please check your connection and try again.");
+        } finally {
+            setIsLoading(false);
+        }
     };
     
     if (showMementoPage) {
@@ -117,57 +97,59 @@ ${cardDetails}
     const enlargedCard = enlargedCardId ? cardData.find(card => card.id === enlargedCardId) : null;
 
     return (
-        <div className="page-container reading-page-bg card-selection-page">
-            <header>
-                <h1>Your Strangel Reading</h1>
-                <p className="well-text">Click on a card to see it more closely.</p>
-            </header>
-            <main>
-                <div className="reading-cards-grid">
-                    {readingCards.map(card => (
-                        <div key={card.id} className="reading-card" onClick={() => setEnlargedCardId(card.id)}>
-                            <img src={card.imageSrc} alt={card.name} />
-                        </div>
-                    ))}
-                </div>
-
-                {!interpretation && !isLoading && (
-                     <button onClick={getInterpretation} className="ask-gerry-button">
-                        Ask Gemini To Consult With Archangel Gerry
-                    </button>
-                )}
-
-                {/* --- UPDATED: Shows the new descriptive loading message --- */}
-                {isLoading && <Loader message={loadingMessage} />}
-
-                {interpretation && (
-                    <>
-                        <div className="interpretation-box">
-                            {interpretation}
-                        </div>
-                        <div className="post-reading-options">
-                             <button className="memento-button" onClick={() => setShowMementoPage(true)}>
-                                Create Memento
-                            </button>
-                             <button className="journey-button" onClick={() => setPage('progress-to-heaven')}>
-                                Help Gerry on His Journey
-                            </button>
-                        </div>
-                    </>
-                )}
-                 <button onClick={() => setPage('home')} className="new-reading-button">
-                    Start a New Reading
-                </button>
-            </main>
-
-            {enlargedCard && (
-                <div className="enlarged-card-overlay" onClick={() => setEnlargedCardId(null)}>
-                    <div className="enlarged-card-modal">
-                        <img src={enlargedCard.imageSrc} alt={enlargedCard.name} />
+        <>
+            <style>{pageStyles}</style>
+            <div className="page-container reading-page-bg card-selection-page">
+                <header>
+                    <h1>Your Strangel Reading</h1>
+                    <p className="well-text">Click on a card to see it more closely.</p>
+                </header>
+                <main>
+                    <div className="reading-cards-grid">
+                        {readingCards.map(card => (
+                            <div key={card.id} className="reading-card" onClick={() => setEnlargedCardId(card.id)}>
+                                <img src={card.imageSrc} alt={card.name} />
+                            </div>
+                        ))}
                     </div>
-                </div>
-            )}
-        </div>
+
+                    {!interpretation && !isLoading && (
+                         <button onClick={getInterpretation} className="ask-gerry-button">
+                            Ask Gemini To Consult With Archangel Gerry
+                        </button>
+                    )}
+
+                    {isLoading && <Loader />}
+
+                    {interpretation && (
+                        <>
+                            <div className="interpretation-box">
+                                {interpretation}
+                            </div>
+                            <div className="post-reading-options">
+                                 <button className="memento-button" onClick={() => setShowMementoPage(true)}>
+                                    Create Memento
+                                </button>
+                                 <button className="journey-button" onClick={() => setPage('progress-to-heaven')}>
+                                    Help Gerry on His Journey
+                                </button>
+                            </div>
+                        </>
+                    )}
+                     <button onClick={() => setPage('home')} className="new-reading-button">
+                        Start a New Reading
+                    </button>
+                </main>
+
+                {enlargedCard && (
+                    <div className="enlarged-card-overlay" onClick={() => setEnlargedCardId(null)}>
+                        <div className="enlarged-card-modal">
+                            <img src={enlargedCard.imageSrc} alt={enlargedCard.name} />
+                        </div>
+                    </div>
+                )}
+            </div>
+        </>
     );
 }
 
