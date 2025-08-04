@@ -117,7 +117,7 @@ export const CARD_DATA = [
         "The card is designed in the style of a traditional playing card.",
         "The four hedgehogs are drawn in a simple style.",
         "Only one of the four hedgehogs is colored in.",
-        "One of the hedgehogs has wings.",
+        "One of the hedgehogs has wings. Maybe it's a hedgehawk.",
         "The hedgehogs have legs that resemble human legs."
     ]
   },
@@ -355,7 +355,7 @@ export const CARD_DATA = [
         "The house has a red door, a blue roof, white walls, and no windows.",
         "The sky is orange with a large circle that could be the sun or moon.",
         "Black, jagged lines outline the house and emanate from its roof.",
-        "This was the first card created in a new deck.",
+        "It is hard to tell if it is day or night.",
         "Three black swirls are faintly visible through the roof of the house."
     ]
   },

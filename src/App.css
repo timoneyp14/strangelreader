@@ -161,17 +161,11 @@ box-sizing: border-box !important;
 
 
 /* --- Styles for Card Selection Grid --- */
-
 .card-grid {
-
-display: grid !important;
-
-grid-template-columns: repeat(3, 1fr) !important;
-
-gap: 10px !important; /* Reduced gap */
-
-max-width: 100% !important;
-
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 

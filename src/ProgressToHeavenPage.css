@@ -274,3 +274,7 @@
     0%, 100% { opacity: 0.2; }
     50% { opacity: 0.8; }
 }
+.orb-contribution-container button,
+.orb-contribution-container input[type="text"] {
+  font-family: 'IM Fell English SC', serif;
+}

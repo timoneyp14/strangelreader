@@ -90,6 +90,9 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
         min-height: 120px;
       }
       .card-grid {
+        .card-grid {
+        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
       }
     }
@@ -195,7 +198,7 @@ function CardSelectionPage({ userQuery, setUserQuery, setSelectedCards, setPage,
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 rows="6"
-                placeholder="Whisper your secrets to the water..."
+                placeholder="Offer Your Thoughts To The Water..."
                 readOnly={isWellTold} 
               />
               <button onClick={handleTellTheWell} disabled={isWellTold}>
