@@ -1,188 +1,370 @@
 /* --- Universal Box-Sizing Rule --- */
+
 *,
+
 *::before,
+
 *::after {
-  box-sizing: border-box;
+
+box-sizing: border-box;
+
 }
 
+
+
 /* =================================== */
-/* Mobile & Tablet Styles              */
+
+/* Mobile & Tablet Styles */
+
 /* =================================== */
+
 @media (max-width: 768px) {
 
-  /* --- Styles for the Header --- */
-  .app-header {
-    flex-direction: column !important;
-    padding-top: 20px !important;
-    padding-bottom: 10px !important;
-  }
-  .app-header .main-title {
-    margin-bottom: 15px !important;
-    text-align: center !important; /* Center the title text */
-  }
-  .app-header nav {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-  .app-header nav a {
-    margin-left: 0 !important;
-    margin-bottom: 15px !important;
-    font-size: 1.1rem !important;
-  }
 
-  /* --- Styles for Page Content --- */
-  .page-container,
-  .memento-page-background {
-    padding: 20px !important; 
-  }
-  
-  /* --- Styles for the Reading Cards Grid --- */
-  .reading-cards-grid {
-    grid-template-columns: 1fr !important;
-  }
 
-  /* --- Styles for Reading Page Buttons --- */
-  .post-reading-options {
-    display: flex !important;
-    flex-direction: column !important; 
-    align-items: center !important;   
-    gap: 1rem !important;             
-  }
-  .ask-gerry-button, 
-  .new-reading-button, 
-  .memento-button, 
-  .journey-button {
-    width: 90% !important; 
-    max-width: 350px !important; 
-    padding: 1rem !important; 
-    font-size: 1rem !important; 
-    margin-left: auto !important; 
-    margin-right: auto !important;
-    box-sizing: border-box !important;
-  }
+/* --- Styles for the Header --- */
 
-  /* --- Styles for Homepage Card --- */
-  .card {
-    width: 75vw; 
-    max-width: 320px !important;
-  }
+.app-header {
 
-  /* --- AGGRESSIVE FIX for other wide elements --- */
-  .well-container,
-  .interpretation-box,
-  .intro-text,
-  .well-text {
-    width: 100% !important; 
-    max-width: 100% !important; 
-    margin-left: 0 !important; 
-    margin-right: 0 !important; 
-    box-sizing: border-box !important; 
-  }
-  
-  /* --- Styles for Card Selection Grid --- */
-  .card-grid {
-    display: grid !important; 
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 10px !important; /* Reduced gap */
-    max-width: 100% !important;
-  }
+flex-direction: column !important;
 
-  /* --- Make the individual cards smaller --- */
-  .card-back {
-    width: 62px !important;
-    height: 93px !important;
-  }
+padding-top: 20px !important;
 
-  /* --- Styles for Form Boxes (Well & Subscription) --- */
-  .query-box,
-  .subscription-box {
-    width: 60vw !important;
-    max-width: 260px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    box-sizing: border-box !important;
-  }
+padding-bottom: 10px !important;
 
-  .query-box {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-  
-  /* --- Stack Subscription Form on Mobile --- */
-  .subscription-form {
-    flex-direction: column !important;
-    width: 100% !important;
-    gap: 0.75rem !important; /* Creates vertical space between the stacked items */
-  }
+}
 
-  .subscription-form input,
-  .subscription-form button {
-    width: 100% !important; /* Make both input and button full-width */
-    box-sizing: border-box !important; /* Prevents padding from breaking the layout */
-  }
+.app-header .main-title {
 
-  /* --- Specific text adjustments for mobile --- */
-  .well-text,
-  .intro-text {
-    font-size: 1.1rem !important;
-    line-height: 1.5 !important;
-  }
+margin-bottom: 15px !important;
 
-  /* --- Memento Styles for Mobile --- */
-  .memento-container {
-      width: 75vw !important; 
-      max-width: 320px !important;
-      height: auto !important;
-      aspect-ratio: 1 / 1 !important;
-      padding: 15px !important;
-      margin-bottom: 20px !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: space-around !important; /* Better vertical spacing */
-  }
+text-align: center !important; /* Center the title text */
 
-  .memento-container .branding {
-      font-size: 0.6rem !important;
-      margin-bottom: 0 !important; 
-  }
+}
 
-  .memento-container .card-display-area {
-      height: auto !important; 
-      margin: 5px 0 !important;
-      flex-shrink: 0;
-  }
+.app-header nav {
 
-  .memento-container .hero-card {
-      width: 100px !important;
-      height: 150px !important;
-  }
+display: flex !important;
 
-  .memento-container .background-card {
-      width: 80px !important;
-      height: 120px !important;
-  }
+flex-direction: column !important;
 
-  .memento-container .card-behind-1 {
-      transform: translateY(-8px) translateX(-35px) rotate(-15deg) !important;
-  }
-  .memento-container .card-behind-2 {
-      transform: translateY(-15px) rotate(0deg) !important;
-  }
-  .memento-container .card-behind-3 {
-      transform: translateY(-8px) translateX(35px) rotate(15deg) !important;
-  }
+align-items: center !important;
 
-  .memento-container .answer-text {
-      font-size: 0.7rem !important;
-      margin: 0 auto !important; 
-      line-height: 1.3 !important;
-  }
+}
 
-  .memento-buttons-container {
-      flex-direction: column !important;
-  }
+.app-header nav a {
+
+margin-left: 0 !important;
+
+margin-bottom: 15px !important;
+
+font-size: 1.1rem !important;
+
+}
+
+
+
+/* --- Styles for Page Content --- */
+
+.page-container,
+
+.memento-page-background {
+
+padding: 20px !important;
+
+}
+
+
+/* --- Styles for the Reading Cards Grid --- */
+
+.reading-cards-grid {
+
+grid-template-columns: 1fr !important;
+
+}
+
+
+
+/* --- Styles for Reading Page Buttons --- */
+
+.post-reading-options {
+
+display: flex !important;
+
+flex-direction: column !important;
+
+align-items: center !important;
+
+gap: 1rem !important;
+
+}
+
+.ask-gerry-button,
+
+.new-reading-button,
+
+.memento-button,
+
+.journey-button {
+
+width: 90% !important;
+
+max-width: 350px !important;
+
+padding: 1rem !important;
+
+font-size: 1rem !important;
+
+margin-left: auto !important;
+
+margin-right: auto !important;
+
+box-sizing: border-box !important;
+
+}
+
+
+
+/* --- Styles for Homepage Card --- */
+
+.card {
+
+width: 75vw;
+
+max-width: 320px !important;
+
+}
+
+
+
+/* --- AGGRESSIVE FIX for other wide elements --- */
+
+.well-container,
+
+.interpretation-box,
+
+.intro-text,
+
+.well-text {
+
+width: 100% !important;
+
+max-width: 100% !important;
+
+margin-left: 0 !important;
+
+margin-right: 0 !important;
+
+box-sizing: border-box !important;
+
+}
+
+
+/* --- Styles for Card Selection Grid --- */
+
+.card-grid {
+
+display: grid !important;
+
+grid-template-columns: repeat(3, 1fr) !important;
+
+gap: 10px !important; /* Reduced gap */
+
+max-width: 100% !important;
+
+}
+
+
+
+/* --- Make the individual cards smaller --- */
+
+.card-back {
+
+width: 62px !important;
+
+height: 93px !important;
+
+}
+
+
+
+/* --- Styles for Form Boxes (Well & Subscription) --- */
+
+.query-box,
+
+.subscription-box {
+
+width: 60vw !important;
+
+max-width: 260px !important;
+
+margin-left: auto !important;
+
+margin-right: auto !important;
+
+box-sizing: border-box !important;
+
+}
+
+
+
+.query-box {
+
+display: flex !important;
+
+flex-direction: column !important;
+
+align-items: center !important;
+
+}
+
+
+/* --- Stack Subscription Form on Mobile --- */
+
+.subscription-form {
+
+flex-direction: column !important;
+
+width: 100% !important;
+
+gap: 0.75rem !important; /* Creates vertical space between the stacked items */
+
+}
+
+
+
+.subscription-form input,
+
+.subscription-form button {
+
+width: 100% !important; /* Make both input and button full-width */
+
+box-sizing: border-box !important; /* Prevents padding from breaking the layout */
+
+}
+
+
+
+/* --- Specific text adjustments for mobile --- */
+
+.well-text,
+
+.intro-text {
+
+font-size: 1.1rem !important;
+
+line-height: 1.5 !important;
+
+}
+
+
+
+/* --- Memento Styles for Mobile --- */
+
+.memento-container {
+
+width: 75vw !important;
+
+max-width: 320px !important;
+
+height: auto !important;
+
+aspect-ratio: 1 / 1 !important;
+
+padding: 15px !important;
+
+margin-bottom: 20px !important;
+
+display: flex !important;
+
+flex-direction: column !important;
+
+justify-content: space-around !important; /* Better vertical spacing */
+
+}
+
+
+
+.memento-container .branding {
+
+font-size: 0.6rem !important;
+
+margin-bottom: 0 !important;
+
+}
+
+
+
+.memento-container .card-display-area {
+
+height: auto !important;
+
+margin: 5px 0 !important;
+
+flex-shrink: 0;
+
+}
+
+
+
+.memento-container .hero-card {
+
+width: 100px !important;
+
+height: 150px !important;
+
+}
+
+
+
+.memento-container .background-card {
+
+width: 80px !important;
+
+height: 120px !important;
+
+}
+
+
+
+.memento-container .card-behind-1 {
+
+transform: translateY(-8px) translateX(-35px) rotate(-15deg) !important;
+
+}
+
+.memento-container .card-behind-2 {
+
+transform: translateY(-15px) rotate(0deg) !important;
+
+}
+
+.memento-container .card-behind-3 {
+
+transform: translateY(-8px) translateX(35px) rotate(15deg) !important;
+
+}
+
+
+
+.memento-container .answer-text {
+
+font-size: 0.7rem !important;
+
+margin: 0 auto !important;
+
+line-height: 1.3 !important;
+
+}
+
+
+
+.memento-buttons-container {
+
+flex-direction: column !important;
+
+}
+
 }
 
 

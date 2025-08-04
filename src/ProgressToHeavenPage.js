@@ -100,11 +100,20 @@ function ProgressToHeavenPage() {
         gerryTopPosition = lastOrbTop - 160; 
     }
 
-    // --- THE FIX IS HERE ---
-    // The component's root element now ONLY uses the '.progress-page' class,
+    // --- The component's root element now ONLY uses the '.progress-page' class,
     // making it independent from the shared '.page-container' style from App.css.
     return (
         <div className="progress-page">
+            {/* This new style block hides the realm title on mobile devices */}
+            <style>
+            {`
+              @media (max-width: 768px) {
+                .realm-title {
+                  display: none;
+                }
+              }
+            `}
+            </style>
             <div className="realm-scroller" ref={scrollerRef}>
                 <div className="path-container" style={{ height: `${totalHeight}px` }}>
                     {[...Array(150)].map((_, i) => (

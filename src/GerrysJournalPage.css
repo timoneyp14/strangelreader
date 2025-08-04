@@ -1,15 +1,15 @@
 /* ===================================================================== */
-/* Updated Styles for Gerry's Journal Page for Site Consistency     */
+/* Styles for Gerry's Journal Page                                       */
 /* ===================================================================== */
 
 .journal-page-wrapper {
     font-family: "Georgia", "Times New Roman", serif;
     color: #333;
-    padding: 1px 0;
+    padding: 1px 0; /* Prevents margin collapse */
 }
 
 .journal-page-wrapper .journal-wrapper {
-    background-color: #faf5ff;
+    background-color: #faf5ff; /* A very light purple */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px 40px;
@@ -19,7 +19,7 @@
 
 .journal-page-wrapper .journal-main-title {
     font-size: 2.8rem;
-    color: #4a148c;
+    color: #4a148c; /* Dark purple */
     font-weight: bold;
     text-align: center;
     margin-bottom: 2.5rem;
@@ -42,7 +42,7 @@
 
 .journal-page-wrapper .journal-entry-card h2 {
     font-size: 2.2rem;
-    color: #6a1b9a;
+    color: #6a1b9a; /* Medium purple */
     font-weight: bold;
     margin-top: 0;
     margin-bottom: 1rem;

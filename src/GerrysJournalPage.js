@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { db } from './firebase'; 
-import { collection, getDocs, onSnapshot, addDoc, serverTimestamp, query, orderBy } from 'firebase/firestore';
+// --- UPDATED: 'where' is now imported from firestore ---
+import { collection, getDocs, onSnapshot, addDoc, serverTimestamp, query, where, orderBy } from 'firebase/firestore';
+// --- FIX: The CSS import has been moved to the correct position ---
 import './GerrysJournalPage.css';
+
+// --- NEW: Mystical Orb Loader Component ---
+const Loader = () => (
+    <div className="loader-container">
+        <div className="orb-loader"></div>
+        <p className="loading-message">Gerry is gathering his thoughts...</p>
+    </div>
+);
 
 const GerrysJournalPage = ({ isAdmin }) => {
     const [journalEntries, setJournalEntries] = useState([]);
@@ -12,23 +22,57 @@ const GerrysJournalPage = ({ isAdmin }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // --- NEW: Mobile-specific styles ---
-    const mobileStyles = `
+    // --- NEW: Component-specific styles for the orb loader and mobile layout ---
+    const pageStyles = `
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh;
+            text-align: center;
+        }
+        .loading-message {
+            margin-top: 1rem;
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: 1.2rem;
+            color: #581c87;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 15px rgba(168, 85, 247, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
+            }
+        }
+        .orb-loader {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #a855f7; /* Purple orb color */
+            animation: pulse 2s infinite;
+        }
+
+        /* --- FIX: Re-added mobile layout styles --- */
         @media (max-width: 768px) {
             .journal-page-wrapper .journal-entry-card, 
             .journal-page-wrapper .journal-archive-card, 
             .journal-page-wrapper .journal-comments-card {
-                /* Reduce side padding on mobile to give text more room */
-                padding-left: 1rem;
-                padding-right: 1rem;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
             }
 
             .journal-page-wrapper .journal-wrapper {
-                /* Reduce side margins on mobile */
                 margin-left: 0.5rem;
                 margin-right: 0.5rem;
-                padding-left: 1rem;
-                padding-right: 1rem;
+                padding: 20px 1rem;
             }
         }
     `;
@@ -39,7 +83,11 @@ const GerrysJournalPage = ({ isAdmin }) => {
             try {
                 setLoading(true);
                 const entriesCollection = collection(db, 'journal');
-                const entrySnapshot = await getDocs(entriesCollection);
+                
+                // The query now only fetches documents where 'isPublished' is true.
+                const q = query(entriesCollection, where("isPublished", "==", true));
+                
+                const entrySnapshot = await getDocs(q);
                 const entriesList = entrySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 
                 if (isMounted) {
@@ -68,8 +116,8 @@ const GerrysJournalPage = ({ isAdmin }) => {
     useEffect(() => {
         if (!activeEntry) return;
         const commentsCollection = collection(db, 'journal', activeEntry.id, 'comments');
-        const q = query(commentsCollection, orderBy('timestamp', 'asc'));
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const q_comments = query(commentsCollection, orderBy('timestamp', 'asc'));
+        const unsubscribe = onSnapshot(q_comments, (querySnapshot) => {
             const commentsList = querySnapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data(),
@@ -119,8 +167,16 @@ const GerrysJournalPage = ({ isAdmin }) => {
     
     const archiveEntries = journalEntries.filter(entry => entry.id !== activeEntry?.id);
 
+    // --- UPDATED: The loading state now shows the orb loader ---
     if (loading) {
-        return <div className="journal-page-wrapper"><div>Loading Gerry's thoughts...</div></div>;
+        return (
+            <>
+                <style>{pageStyles}</style>
+                <div className="journal-page-wrapper">
+                    <Loader />
+                </div>
+            </>
+        );
     }
     
     if (error) {
@@ -129,7 +185,7 @@ const GerrysJournalPage = ({ isAdmin }) => {
 
     return (
         <>
-            <style>{mobileStyles}</style>
+            <style>{pageStyles}</style>
             <div className="journal-page-wrapper">
                 <div className="journal-wrapper">
                     <h1 className="journal-main-title">From the Journal of Archangel Gerry</h1>
